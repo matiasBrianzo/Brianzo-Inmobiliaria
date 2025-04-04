@@ -11,71 +11,87 @@
 </p>
 
 
-@if(TempData["creado"] !=  null){
+@if (TempData["creado"] != null)
+{
     <div class="alert alert-success" role="alert">
-    Inquilino Creado Exitosamente
+        Inquilino Creado Exitosamente
     </div>
 }
 
-@if(TempData["eliminado"] !=  null){
-<div class="alert alert-danger" role="alert">
-    Inquilino Eliminado Exitosamente
-</div>
+@if (TempData["eliminado"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        Inquilino Eliminado Exitosamente
+    </div>
 }
 
-@if(TempData["editado"] !=  null){
-<div class="alert alert-warning" role="alert">
-    Inquilino Editado Exitosamente
-</div>
+@if (TempData["editado"] != null)
+{
+    <div class="alert alert-warning" role="alert">
+        Inquilino Editado Exitosamente
+    </div>
 }
 
 
 <div class="card">
-  <div class="card-header">
-    Listado de Inquilinos
-  </div>
-  <div class="card-body">
-    
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Apellido)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Telefono)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Apellido)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Telefono)
-            </td>
-            <td>
-                @Html.ActionLink("Editar", "Edit", new { id=item.IdInquilino }, new { @class="btn btn-warning" }) |
-                @Html.ActionLink("Detalles", "Details", new { id=item.IdInquilino }, new { @class="btn btn-info" }) |
-                @if(User.IsInRole("Administrador")){
-                     @Html.ActionLink("Eliminar", "Delete", new { id=item.IdInquilino }, new { @class="btn btn-danger" })
+    <div class="card-header">
+        Listado de Inquilinos
+    </div>
+    <div class="card-body">
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Apellido)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nombre)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Telefono)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Apellido)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nombre)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Telefono)
+                        </td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.IdInquilino"
+                                    title="Editar">
+                                    <i class="fa-solid fa-pen"></i>
+                                </a>
+                                <a class="btn btn-info" asp-action="Details" asp-route-id="@item.IdInquilino"
+                                    title="Detalle">
+                                    <i class="fa-solid fa-eye"></i>
+                                </a>
+                                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.IdInquilino"
+                                    title="Eliminar">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </a>
+                                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.IdInquilino"
+                                    title="Eliminar">
+                                <i class="fa-solid fa-trash-can"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
                 }
-                @Html.ActionLink("Ver Contratos", "ContratosPorInquilino","Contratos", new { id=item.IdInquilino }, new { @class="btn btn-outline-primary" }) |
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+            </tbody>
+        </table>
 
 
-  </div>
+    </div>
 </div>
