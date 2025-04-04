@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Brianzo_Inmobiliaria.Models.Propietario>
+
+@{
+	ViewData["Title"] = "Propietarios";
+}
+
+<h1>
+	Propietarios
+	<div class="btn-group pull-right">
+		<a class="btn btn-primary" asp-action="Create" title="Crear"><i class="fa-solid fa-plus"></i></a>
+	</div>
+</h1>
+@if(TempData["creado"] !=  null){
+    <div class="alert alert-success" role="alert">
+    Propietario Creado Exitosamente
+    </div>
+}
+
+@if(TempData["eliminado"] !=  null){
+<div class="alert alert-danger" role="alert">
+    Propietario Eliminado Exitosamente
+</div>
+}
+
+@if(TempData["editado"] !=  null){
+<div class="alert alert-warning" role="alert">
+    Propietario Editado Exitosamente
+</div>
+}
+<table class="table table-striped">
+	<thead>
+		<tr>			
+			<th>
+				@Html.DisplayNameFor(model => model.Nombre)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Apellido)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Email)
+			</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		@foreach (var item in Model)
+		{
+			<tr>
+				
+				<td>
+					@Html.DisplayFor(modelItem => item.Nombre)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.Apellido)
+				</td>				
+				<td>
+					@Html.DisplayFor(modelItem => item.Email)
+				</td>
+				<td>
+					<div class="btn-group" role="group">
+						<a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.IdPropietario" title="Editar">
+							<i class="fa-solid fa-pen"></i>
+						</a>
+						<a class="btn btn-primary" asp-action="Details" asp-route-id="@item.IdPropietario" title="Detalle">
+							<i class="fa-solid fa-eye"></i>
+						</a>
+						<a class="btn btn-danger" asp-action="Eliminar" asp-route-id="@item.IdPropietario" title="Eliminar">
+							<i class="fa-solid fa-trash-can"></i>
+						</a>						
+					</div>
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
