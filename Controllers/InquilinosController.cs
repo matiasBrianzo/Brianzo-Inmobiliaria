@@ -9,7 +9,7 @@ public class InquilinosController : Controller
 	private readonly IConfiguration config;
 
 	public InquilinosController(IRepositorioInquilino repo, IConfiguration config)
-	{		
+	{
 		this.repositorio = repo;
 		this.config = config;
 	}
@@ -31,7 +31,8 @@ public class InquilinosController : Controller
 		}
 		catch (Exception ex)
 		{// Poner breakpoints para detectar errores
-			throw ex;
+			ViewBag.Mensaje = ex;
+			throw View(ViewBag);
 		}
 	}
 	// GET: Inquilino/Details/5
@@ -45,9 +46,10 @@ public class InquilinosController : Controller
 		}
 		catch (Exception ex)
 		{// Poner breakpoints para detectar errores
-			throw ex;
+			ViewBag.Mensaje = ex;
+			throw View(ViewBag);
 		}
-	}	
+	}
 
 	// GET: Inquilino/Edit/5
 	public ActionResult Edit(int id)
@@ -59,7 +61,8 @@ public class InquilinosController : Controller
 		}
 		catch (Exception ex)
 		{//poner breakpoints para detectar errores
-			throw;
+			ViewBag.Mensaje = ex;
+			throw View(ViewBag);
 		}
 	}
 
@@ -70,22 +73,23 @@ public class InquilinosController : Controller
 	public ActionResult Edit(int id, Inquilino entidad)
 	{
 		// Si en lugar de IFormCollection ponemos Propietario, el enlace de datos lo hace el sistema
-		Inquilino p = null;
+		Inquilino? p = null;
 		try
 		{
 			p = repositorio.ObtenerPorId(id);
 			////////////////////////////////////////
 			p.Nombre = entidad.Nombre;
 			p.Apellido = entidad.Apellido;
-			p.Dni = entidad.Dni;			
+			p.Dni = entidad.Dni;
 			p.Telefono = entidad.Telefono;
-			repositorio.Modificacion(p);			
+			repositorio.Modificacion(p);
 			TempData["editado"] = "Si";
 			return RedirectToAction(nameof(Index));
 		}
 		catch (Exception ex)
 		{//poner breakpoints para detectar errores
-			throw;
+			ViewBag.Mensaje = ex;
+			throw View(ViewBag);
 		}
 	}
 
@@ -98,7 +102,8 @@ public class InquilinosController : Controller
 		}
 		catch (Exception ex)
 		{//poner breakpoints para detectar errores
-			throw;
+			ViewBag.Mensaje = ex;
+			throw View(ViewBag);
 		}
 	}
 	// POST: Inquilino/Create
@@ -119,7 +124,7 @@ public class InquilinosController : Controller
 						numBytesRequested: 256 / 8));*/
 				repositorio.Alta(inquilino);
 				TempData["Id"] = inquilino.IdInquilino;
-				TempData["creado"]= "Si";
+				TempData["creado"] = "Si";
 				return RedirectToAction(nameof(Index));
 			}
 			else
@@ -127,38 +132,41 @@ public class InquilinosController : Controller
 		}
 		catch (Exception ex)
 		{//poner breakpoints para detectar errores
-			throw;
+			ViewBag.Mensaje = ex;
+			throw View(ViewBag);
 		}
 	}
 
 	// GET: Inquilino/Delete/5
-	public ActionResult Eliminar(int id)
+	public ActionResult Delete(int id)
 	{
 		try
 		{
-			var entidad = repositorio.ObtenerPorId(id);			
+			var entidad = repositorio.ObtenerPorId(id);
 			return View(entidad);
 		}
 		catch (Exception ex)
 		{//poner breakpoints para detectar errores
-			throw;
+			ViewBag.Mensaje = ex;
+			throw View(ViewBag);
 		}
 	}
 
 	// POST: Inquilino/Delete/5
 	[HttpPost]
 	[ValidateAntiForgeryToken]
-	public ActionResult Eliminar(int id, Propietario entidad)
+	public ActionResult Delete(int id, Propietario entidad)
 	{
 		try
 		{
-			repositorio.Baja(id);			
-			TempData["eliminado"]= "Si";
+			repositorio.Baja(id);
+			TempData["eliminado"] = "Si";
 			return RedirectToAction(nameof(Index));
 		}
 		catch (Exception ex)
 		{//poner breakpoints para detectar errores
-			throw;
+			ViewBag.Mensaje = ex;
+			throw View(ViewBag);
 		}
 	}
 }

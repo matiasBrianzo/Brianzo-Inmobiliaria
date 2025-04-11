@@ -36,7 +36,8 @@ public class PropietariosController : Controller
 		}
 		catch (Exception ex)
 		{// Poner breakpoints para detectar errores
-			throw ex;
+			ViewBag.Mensaje = ex;
+			throw View(ViewBag);
 		}
 	}
 	// GET: Propietarios/Details/5
@@ -50,7 +51,8 @@ public class PropietariosController : Controller
 		}
 		catch (Exception ex)
 		{// Poner breakpoints para detectar errores
-			throw ex;
+			ViewBag.Mensaje = ex;
+			throw View(ViewBag);
 		}
 	}
 	// GET: Propietario
@@ -74,7 +76,8 @@ public class PropietariosController : Controller
 		}
 		catch (Exception ex)
 		{// Poner breakpoints para detectar errores
-			throw;
+			ViewBag.Mensaje = ex;
+			throw View(ViewBag);
 		}
 	}
 
@@ -89,7 +92,8 @@ public class PropietariosController : Controller
 		}
 		catch (Exception ex)
 		{//poner breakpoints para detectar errores
-			throw;
+			ViewBag.Mensaje = ex;
+			throw View(ViewBag);
 		}
 	}
 
@@ -100,7 +104,7 @@ public class PropietariosController : Controller
 	public ActionResult Edit(int id, Propietario entidad)
 	{
 		// Si en lugar de IFormCollection ponemos Propietario, el enlace de datos lo hace el sistema
-		Propietario p = null;
+		Propietario? p = null;
 		try
 		{
 			p = repositorio.ObtenerPorId(id);
@@ -110,13 +114,14 @@ public class PropietariosController : Controller
 			p.Dni = entidad.Dni;
 			p.Email = entidad.Email;
 			p.Telefono = entidad.Telefono;
-			repositorio.Modificacion(p);			
+			repositorio.Modificacion(p);
 			TempData["editado"] = "Si";
 			return RedirectToAction(nameof(Index));
 		}
 		catch (Exception ex)
 		{//poner breakpoints para detectar errores
-			throw;
+			ViewBag.Mensaje = ex;
+			throw View(ViewBag);
 		}
 	}
 
@@ -144,7 +149,8 @@ public class PropietariosController : Controller
 		}
 		catch (Exception ex)
 		{//poner breakpoints para detectar errores
-			throw;
+			ViewBag.Mensaje = ex;
+			throw View(ViewBag);
 		}
 	}
 	// POST: Propietario/Create
@@ -165,7 +171,7 @@ public class PropietariosController : Controller
 						numBytesRequested: 256 / 8));*/
 				repositorio.Alta(propietario);
 				TempData["Id"] = propietario.IdPropietario;
-				TempData["creado"]= "Si";
+				TempData["creado"] = "Si";
 				return RedirectToAction(nameof(Index));
 			}
 			else
@@ -173,38 +179,41 @@ public class PropietariosController : Controller
 		}
 		catch (Exception ex)
 		{//poner breakpoints para detectar errores
-			throw;
+			ViewBag.Mensaje = ex;
+			throw View(ViewBag);
 		}
 	}
 
 	// GET: Propietario/Delete/5
-	public ActionResult Eliminar(int id)
+	public ActionResult Delete(int id)
 	{
 		try
 		{
-			var entidad = repositorio.ObtenerPorId(id);			
+			var entidad = repositorio.ObtenerPorId(id);
 			return View(entidad);
 		}
 		catch (Exception ex)
 		{//poner breakpoints para detectar errores
-			throw;
+			ViewBag.Mensaje = ex;
+			throw View(ViewBag);
 		}
 	}
 
 	// POST: Propietario/Delete/5
 	[HttpPost]
 	[ValidateAntiForgeryToken]
-	public ActionResult Eliminar(int id, Propietario entidad)
+	public ActionResult Delete(int id, Propietario entidad)
 	{
 		try
 		{
-			repositorio.Baja(id);			
-			TempData["eliminado"]= "Si";
+			repositorio.Baja(id);
+			TempData["eliminado"] = "Si";
 			return RedirectToAction(nameof(Index));
 		}
 		catch (Exception ex)
 		{//poner breakpoints para detectar errores
-			throw;
+			ViewBag.Mensaje = ex;
+			throw View(ViewBag);
 		}
 	}
 
