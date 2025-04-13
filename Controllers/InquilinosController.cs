@@ -31,8 +31,8 @@ public class InquilinosController : Controller
 		}
 		catch (Exception ex)
 		{// Poner breakpoints para detectar errores
-			ViewBag.Mensaje = ex;
-			throw View(ViewBag);
+			
+			throw  ;
 		}
 	}
 	// GET: Inquilino/Details/5
@@ -46,8 +46,8 @@ public class InquilinosController : Controller
 		}
 		catch (Exception ex)
 		{// Poner breakpoints para detectar errores
-			ViewBag.Mensaje = ex;
-			throw View(ViewBag);
+			
+			throw  ;
 		}
 	}
 
@@ -61,8 +61,8 @@ public class InquilinosController : Controller
 		}
 		catch (Exception ex)
 		{//poner breakpoints para detectar errores
-			ViewBag.Mensaje = ex;
-			throw View(ViewBag);
+			
+			throw  ;
 		}
 	}
 
@@ -88,8 +88,8 @@ public class InquilinosController : Controller
 		}
 		catch (Exception ex)
 		{//poner breakpoints para detectar errores
-			ViewBag.Mensaje = ex;
-			throw View(ViewBag);
+			
+			throw  ;
 		}
 	}
 
@@ -102,8 +102,8 @@ public class InquilinosController : Controller
 		}
 		catch (Exception ex)
 		{//poner breakpoints para detectar errores
-			ViewBag.Mensaje = ex;
-			throw View(ViewBag);
+			
+			throw  ;
 		}
 	}
 	// POST: Inquilino/Create
@@ -132,8 +132,8 @@ public class InquilinosController : Controller
 		}
 		catch (Exception ex)
 		{//poner breakpoints para detectar errores
-			ViewBag.Mensaje = ex;
-			throw View(ViewBag);
+			
+			throw  ;
 		}
 	}
 
@@ -147,8 +147,8 @@ public class InquilinosController : Controller
 		}
 		catch (Exception ex)
 		{//poner breakpoints para detectar errores
-			ViewBag.Mensaje = ex;
-			throw View(ViewBag);
+			
+			throw  ;
 		}
 	}
 
@@ -165,8 +165,8 @@ public class InquilinosController : Controller
 		}
 		catch (Exception ex)
 		{//poner breakpoints para detectar errores
-			ViewBag.Mensaje = ex;
-			throw View(ViewBag);
+			
+			throw  ;
 		}
 	}
 }

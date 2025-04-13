@@ -36,8 +36,8 @@ public class PropietariosController : Controller
 		}
 		catch (Exception ex)
 		{// Poner breakpoints para detectar errores
-			ViewBag.Mensaje = ex;
-			throw View(ViewBag);
+			
+			throw  ;
 		}
 	}
 	// GET: Propietarios/Details/5
@@ -51,8 +51,8 @@ public class PropietariosController : Controller
 		}
 		catch (Exception ex)
 		{// Poner breakpoints para detectar errores
-			ViewBag.Mensaje = ex;
-			throw View(ViewBag);
+			
+			throw  ;
 		}
 	}
 	// GET: Propietario
@@ -76,8 +76,8 @@ public class PropietariosController : Controller
 		}
 		catch (Exception ex)
 		{// Poner breakpoints para detectar errores
-			ViewBag.Mensaje = ex;
-			throw View(ViewBag);
+			
+			throw  ;
 		}
 	}
 
@@ -92,8 +92,8 @@ public class PropietariosController : Controller
 		}
 		catch (Exception ex)
 		{//poner breakpoints para detectar errores
-			ViewBag.Mensaje = ex;
-			throw View(ViewBag);
+			
+			throw  ;
 		}
 	}
 
@@ -120,8 +120,8 @@ public class PropietariosController : Controller
 		}
 		catch (Exception ex)
 		{//poner breakpoints para detectar errores
-			ViewBag.Mensaje = ex;
-			throw View(ViewBag);
+			
+			throw  ;
 		}
 	}
 
@@ -149,8 +149,8 @@ public class PropietariosController : Controller
 		}
 		catch (Exception ex)
 		{//poner breakpoints para detectar errores
-			ViewBag.Mensaje = ex;
-			throw View(ViewBag);
+			
+			throw  ;
 		}
 	}
 	// POST: Propietario/Create
@@ -179,8 +179,8 @@ public class PropietariosController : Controller
 		}
 		catch (Exception ex)
 		{//poner breakpoints para detectar errores
-			ViewBag.Mensaje = ex;
-			throw View(ViewBag);
+			
+			throw  ;
 		}
 	}
 
@@ -194,8 +194,8 @@ public class PropietariosController : Controller
 		}
 		catch (Exception ex)
 		{//poner breakpoints para detectar errores
-			ViewBag.Mensaje = ex;
-			throw View(ViewBag);
+			
+			throw  ;
 		}
 	}
 
@@ -212,8 +212,8 @@ public class PropietariosController : Controller
 		}
 		catch (Exception ex)
 		{//poner breakpoints para detectar errores
-			ViewBag.Mensaje = ex;
-			throw View(ViewBag);
+			
+			throw  ;
 		}
 	}
 
