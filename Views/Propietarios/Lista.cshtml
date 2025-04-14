@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<Brianzo_Inmobiliaria.Models.Propietario>
 
 @{
-	ViewData["Title"] = "Propietarios";
+	ViewData["Title"] = "PROPIETARIOS";
 	var Pagina = ViewBag.Pagina ?? 1;
 	var TotalPaginas = ViewBag.TotalPaginas ?? 1;
 }
 
 <h1>
-	Propietarios
+	PROPIETARIOS
 	<div class="btn-group pull-right">
 		<a class="btn btn-primary" asp-action="Create" title="Crear"><i class="fa-solid fa-plus"></i></a>
 	</div>
@@ -16,7 +16,7 @@
 	<thead>
 		<tr>
 			<th>
-				@Html.DisplayNameFor(model => model.IdPropietario)
+				@Html.DisplayNameFor(model => model.Id_Propietario)
 			</th>
 			<th>
 				@Html.DisplayNameFor(model => model.Nombre)
@@ -41,7 +41,7 @@
 		{
 			<tr>
 				<td>
-					@Html.DisplayFor(modelItem => item.IdPropietario)
+					@Html.DisplayFor(modelItem => item.Id_Propietario)
 				</td>
 				<td>
 					@Html.DisplayFor(modelItem => item.Nombre)
@@ -60,14 +60,14 @@
 				</td>
 				<td>
 					<div class="btn-group" role="group">
-						<a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.IdPropietario" title="Editar">
+						<a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id_Propietario" title="Editar">
 							<i class="fa-solid fa-pen"></i>
 						</a>
-						<a class="btn btn-danger" asp-action="Eliminar" asp-route-id="@item.IdPropietario" title="Eliminar">
+						<a class="btn btn-danger" asp-action="Eliminar" asp-route-id="@item.Id_Propietario" title="Eliminar">
 							<i class="fa-solid fa-trash-can"></i>
 						</a>						
 						<a class="btn btn-secondary" asp-action="PorPropietario" asp-controller="Inmuebles"
-							asp-route-id="@item.IdPropietario" title="Mis Propiedades">
+							asp-route-id="@item.Id_Propietario" title="Mis Propiedades">
 							<i class="fa-solid fa-building"></i>
 						</a>
 						
@@ -85,7 +85,7 @@
 		@if (Pagina > 1)
 		{
 			<li class="page-item">
-				<a class="page-link" href="~/Propietarios/Lista?pagina=@(Pagina - 1)" aria-label="Anterior">
+				<a class="page-link" href="~/PROPIETARIOS/Lista?pagina=@(Pagina - 1)" aria-label="Anterior">
 					<i class="fa-solid fa-angles-left"></i>
 				</a>
 			</li>
@@ -101,14 +101,14 @@
 		@for (int i = 1; i <= TotalPaginas; i++)
 		{
 			<li class="page-item @(i == Pagina ? "active" : "")">
-				<a class="page-link" href="~/Propietarios/Lista?pagina=@i">@i</a>
+				<a class="page-link" href="~/PROPIETARIOS/Lista?pagina=@i">@i</a>
 			</li>
 		}
 		<!-- Botón "Siguiente" -->
 		@if (Pagina < TotalPaginas)
 		{
 			<li class="page-item">
-				<a class="page-link" href="~/Propietarios/Lista?pagina=@(Pagina + 1)" aria-label="Siguiente">
+				<a class="page-link" href="~/PROPIETARIOS/Lista?pagina=@(Pagina + 1)" aria-label="Siguiente">
 					<i class="fa-solid fa-angles-right"></i>
 				</a>
 			</li>

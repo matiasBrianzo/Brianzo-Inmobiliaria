@@ -5,7 +5,7 @@ public class Inquilino
 {
         [Key]
 		[Display(Name = "Código")]
-		public int IdInquilino { get; set; }
+		public int Id_Inquilino { get; set; }
 		[Required]
 		public string? Apellido { get; set; }
 		[Required]

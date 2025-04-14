@@ -16,7 +16,7 @@ namespace Brianzo_Inmobiliaria.Models
 			int res = -1;
 			using (var connection = new MySqlConnection(connectionString))
 			{
-				var sql = @"INSERT INTO Inquilinos(Apellido,Nombre,Dni,Telefono)
+				var sql = @"INSERT INTO INQUILINOS(Apellido,Nombre,Dni,Telefono)
             VALUES (@Apellido,@Nombre,@Dni,@Telefono);
             SELECT LAST_INSERT_ID()"; ;//devuelve el id insertado (SCOPE_IDENTITY para sql)
 				using (var cmd = new MySqlCommand(sql, connection))
@@ -27,7 +27,7 @@ namespace Brianzo_Inmobiliaria.Models
 					cmd.Parameters.AddWithValue("@Telefono", inquilino.Telefono);
 					connection.Open();
 					res = Convert.ToInt32(cmd.ExecuteScalar());
-					inquilino.IdInquilino = res;
+					inquilino.Id_Inquilino = res;
 					connection.Close();
 				}
 			}
@@ -38,7 +38,7 @@ namespace Brianzo_Inmobiliaria.Models
 			int res = -1;
 			using (var connection = new MySqlConnection(connectionString))
 			{
-				string sql = @$"DELETE FROM Inquilinos WHERE {nameof(Inquilino.IdInquilino)} = @id";
+				string sql = @$"DELETE FROM INQUILINOS WHERE {nameof(Inquilino.Id_Inquilino)} = @id";
 				using (var command = new MySqlCommand(sql, connection))
 				{
 					command.CommandType = CommandType.Text;
@@ -56,9 +56,9 @@ namespace Brianzo_Inmobiliaria.Models
 			int res = -1;
 			using (var connection = new MySqlConnection(connectionString))
 			{
-				string sql = @$"UPDATE Inquilinos 
+				string sql = @$"UPDATE INQUILINOS 
 					SET Apellido=@Apellido, Nombre=@Nombre, Dni=@Dni, Telefono=@Telefono 
-					WHERE {nameof(Inquilino.IdInquilino)} = @id";
+					WHERE {nameof(Inquilino.Id_Inquilino)} = @id";
 				using (var cmd = new MySqlCommand(sql, connection))
 				{
 					cmd.CommandType = CommandType.Text;
@@ -66,7 +66,7 @@ namespace Brianzo_Inmobiliaria.Models
 					cmd.Parameters.AddWithValue("@Nombre", inquilino.Nombre);
 					cmd.Parameters.AddWithValue("@Dni", inquilino.Dni);
 					cmd.Parameters.AddWithValue("@Telefono", inquilino.Telefono);
-					cmd.Parameters.AddWithValue("@id", inquilino.IdInquilino);
+					cmd.Parameters.AddWithValue("@id", inquilino.Id_Inquilino);
 					connection.Open();
 					res = cmd.ExecuteNonQuery();
 					connection.Close();
@@ -80,7 +80,7 @@ namespace Brianzo_Inmobiliaria.Models
 			IList<Inquilino> res = new List<Inquilino>();
 			using (var connection = new MySqlConnection(connectionString))
 			{
-				var sql = "SELECT IdInquilino,Apellido,Nombre,Dni,Telefono FROM Inquilinos";
+				var sql = "SELECT Id_Inquilino,Apellido,Nombre,Dni,Telefono FROM INQUILINOS";
 				using (var command = new MySqlCommand(sql, connection))
 				{
 					command.CommandType = CommandType.Text;
@@ -90,7 +90,7 @@ namespace Brianzo_Inmobiliaria.Models
 					{
 						Inquilino inquilino = new Inquilino
 						{
-							IdInquilino = reader.GetInt32(nameof(Inquilino.IdInquilino)),
+							Id_Inquilino = reader.GetInt32(nameof(Inquilino.Id_Inquilino)),
 							Nombre = reader.GetString("Nombre"),
 							Apellido = reader.GetString("Apellido"),
 							Dni = reader.GetString("Dni"),
@@ -109,9 +109,9 @@ namespace Brianzo_Inmobiliaria.Models
 			Inquilino? inquilino = null;
 			using (var connection = new MySqlConnection(connectionString))
 			{
-				var sql = @"SELECT IdInquilino,Apellido,Nombre,Dni,Telefono
-            FROM Inquilinos
-            WHERE IdInquilino = @id";
+				var sql = @"SELECT Id_Inquilino,Apellido,Nombre,Dni,Telefono
+            FROM INQUILINOS
+            WHERE Id_Inquilino = @id";
 				using (var command = new MySqlCommand(sql, connection))
 				{
 					command.Parameters.Add("@id", DbType.Int32).Value = id;
@@ -122,7 +122,7 @@ namespace Brianzo_Inmobiliaria.Models
 					{
 						inquilino = new Inquilino
 						{
-							IdInquilino = reader.GetInt32(nameof(Inquilino.IdInquilino)),
+							Id_Inquilino = reader.GetInt32(nameof(Inquilino.Id_Inquilino)),
 							Nombre = reader.GetString("Nombre"),
 							Apellido = reader.GetString("Apellido"),
 							Dni = reader.GetString("Dni"),

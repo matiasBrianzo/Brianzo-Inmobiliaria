@@ -50,7 +50,7 @@
 	document.querySelector("#form_buscar").addEventListener("submit", (e) => {
         e.preventDefault();
         var q = $("#q").val();
-        $.get(`@Url.Action("Buscar", "Propietarios")/${q}`).done((res) => {
+        $.get(`@Url.Action("Buscar", "PROPIETARIOS")/${q}`).done((res) => {
 			console.log(res);
 			var template = document.getElementById('t_tabla').innerHTML;
 			var rendered = Mustache.render(template, res);

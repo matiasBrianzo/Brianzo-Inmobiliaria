@@ -40,7 +40,7 @@ public class PropietariosController : Controller
 			throw  ;
 		}
 	}
-	// GET: Propietarios/Details/5
+	// GET: PROPIETARIOS/Details/5
 	public ActionResult Details(int id)
 	{
 		try
@@ -170,7 +170,7 @@ public class PropietariosController : Controller
 						iterationCount: 1000,
 						numBytesRequested: 256 / 8));*/
 				repositorio.Alta(propietario);
-				TempData["Id"] = propietario.IdPropietario;
+				TempData["Id"] = propietario.Id_Propietario;
 				TempData["creado"] = "Si";
 				return RedirectToAction(nameof(Index));
 			}

@@ -123,7 +123,7 @@ public class InquilinosController : Controller
 						iterationCount: 1000,
 						numBytesRequested: 256 / 8));*/
 				repositorio.Alta(inquilino);
-				TempData["Id"] = inquilino.IdInquilino;
+				TempData["Id"] = inquilino.Id_Inquilino;
 				TempData["creado"] = "Si";
 				return RedirectToAction(nameof(Index));
 			}

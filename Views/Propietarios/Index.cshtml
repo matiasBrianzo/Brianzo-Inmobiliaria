@@ -12,19 +12,19 @@
 </h1>
 @if(TempData["creado"] !=  null){
     <div class="alert alert-success" role="alert">
-    Propietario Creado Exitosamente
+    Propietarios Creado Exitosamente
     </div>
 }
 
 @if(TempData["eliminado"] !=  null){
 <div class="alert alert-danger" role="alert">
-    Propietario Eliminado Exitosamente
+    Propietarios Eliminado Exitosamente
 </div>
 }
 
 @if(TempData["editado"] !=  null){
 <div class="alert alert-warning" role="alert">
-    Propietario Editado Exitosamente
+    Propietarios Editado Exitosamente
 </div>
 }
 <table class="table table-striped">
@@ -58,13 +58,13 @@
 				</td>
 				<td>
 					<div class="btn-group" role="group">
-						<a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.IdPropietario" title="Editar">
+						<a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id_Propietario" title="Editar">
 							<i class="fa-solid fa-pen"></i>
 						</a>
-						<a class="btn btn-primary" asp-action="Details" asp-route-id="@item.IdPropietario" title="Detalle">
+						<a class="btn btn-primary" asp-action="Details" asp-route-id="@item.Id_Propietario" title="Detalle">
 							<i class="fa-solid fa-eye"></i>
 						</a>
-						<a class="btn btn-danger" asp-action="Eliminar" asp-route-id="@item.IdPropietario" title="Eliminar">
+						<a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id_Propietario" title="Eliminar">
 							<i class="fa-solid fa-trash-can"></i>
 						</a>						
 					</div>

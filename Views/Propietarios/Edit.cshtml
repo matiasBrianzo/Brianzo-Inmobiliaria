@@ -9,7 +9,7 @@
 	<div class="col-md-4">
 		<form asp-action="Edit">
 			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-			<input type="hidden" name="IdPropietario" value="@Model.IdPropietario" />
+			<input type="hidden" name="Id_Propietario" value="@Model.Id_Propietario" />
 			<div class="form-group">
 				<label asp-for="Nombre" class="control-label"></label>
 				<input asp-for="Nombre" class="form-control" />
@@ -46,8 +46,8 @@
 <hr />
 <div class="row">
 	<div class="col-md-4">
-		<form asp-action="CambiarPass" asp-route-id="@Model.IdPropietario" name="CambiarPass">
-			<input type="hidden" name="IdPropietario" value="@Model.IdPropietario" />
+		<form asp-action="CambiarPass" asp-route-id="@Model.Id_Propietario" name="CambiarPass">
+			<input type="hidden" name="Id_Propietario" value="@Model.Id_Propietario" />
 			<div class="form-group">
 				<label class="control-label">Clave Antigüa</label>
 				<input type="password" name="ClaveVieja" class="form-control" />

@@ -7,7 +7,7 @@ public class Propietario
 {
     [Key]
     [Display(Name = "Código")]
-    public int IdPropietario { get; set; }
+    public int Id_Propietario { get; set; }
 
     [Required]
     public string? Apellido { get; set; }

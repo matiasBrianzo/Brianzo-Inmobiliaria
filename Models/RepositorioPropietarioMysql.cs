@@ -17,8 +17,8 @@ namespace Brianzo_Inmobiliaria.Models
 			int res = -1;
 			using (var connection = new MySqlConnection(connectionString))
 			{
-				//`IdPropietario`, `Apellido`, `Nombre`, `Dni`, `Telefono`, `Email`,`Clave`
-				string sql = @"INSERT INTO Propietarios 
+				
+				string sql = @"INSERT INTO PROPIETARIOS 
 					(Apellido, Nombre, Dni, Telefono, Email, Clave) 
 					VALUES (@nombre, @apellido, @dni, @telefono, @email, @clave);
 					SELECT LAST_INSERT_ID();";//devuelve el id insertado (SCOPE_IDENTITY para sql)
@@ -33,7 +33,7 @@ namespace Brianzo_Inmobiliaria.Models
 					command.Parameters.AddWithValue("@clave", p.Clave);
 					connection.Open();
 					res = Convert.ToInt32(command.ExecuteScalar());
-					p.IdPropietario = res;
+					p.Id_Propietario = res;
 					connection.Close();
 				}
 			}
@@ -44,7 +44,7 @@ namespace Brianzo_Inmobiliaria.Models
 			int res = -1;
 			using (var connection = new MySqlConnection(connectionString))
 			{
-				string sql = @$"DELETE FROM Propietarios WHERE {nameof(Propietario.IdPropietario)} = @id";
+				string sql = @$"DELETE FROM PROPIETARIOS WHERE {nameof(Propietario.Id_Propietario)} = @id";
 				using (var command = new MySqlCommand(sql, connection))
 				{
 					command.CommandType = CommandType.Text;
@@ -61,9 +61,9 @@ namespace Brianzo_Inmobiliaria.Models
 			int res = -1;
 			using (var connection = new MySqlConnection(connectionString))
 			{
-				string sql = @$"UPDATE Propietarios 
+				string sql = @$"UPDATE PROPIETARIOS 
 					SET Apellido=@apellido, Nombre=@nombre, Dni=@dni, Telefono=@telefono, Email=@email, Clave=@clave 
-					WHERE {nameof(Propietario.IdPropietario)} = @id";
+					WHERE {nameof(Propietario.Id_Propietario)} = @id";
 				using (var command = new MySqlCommand(sql, connection))
 				{
 					command.CommandType = CommandType.Text;
@@ -73,7 +73,7 @@ namespace Brianzo_Inmobiliaria.Models
 					command.Parameters.AddWithValue("@telefono", p.Telefono);
 					command.Parameters.AddWithValue("@email", p.Email);
 					command.Parameters.AddWithValue("@clave", p.Clave);
-					command.Parameters.AddWithValue("@id", p.IdPropietario);
+					command.Parameters.AddWithValue("@id", p.Id_Propietario);
 					connection.Open();
 					res = command.ExecuteNonQuery();
 					connection.Close();
@@ -88,8 +88,8 @@ namespace Brianzo_Inmobiliaria.Models
 			using (var connection = new MySqlConnection(connectionString))
 			{
 				string sql = @"SELECT 
-					IdPropietario, Nombre, Apellido, Dni, Telefono, Email, Clave
-					FROM Propietarios";
+					Id_Propietario, Nombre, Apellido, Dni, Telefono, Email, Clave
+					FROM PROPIETARIOS";
 				using (var command = new MySqlCommand(sql, connection))
 				{
 					command.CommandType = CommandType.Text;
@@ -99,7 +99,7 @@ namespace Brianzo_Inmobiliaria.Models
 					{
 						Propietario p = new Propietario
 						{
-							IdPropietario = reader.GetInt32(nameof(Propietario.IdPropietario)),
+							Id_Propietario = reader.GetInt32(nameof(Propietario.Id_Propietario)),
 							Nombre = reader.GetString("Nombre"),
 							Apellido = reader.GetString("Apellido"),
 							Dni = reader.GetString("Dni"),
@@ -121,8 +121,8 @@ namespace Brianzo_Inmobiliaria.Models
 			using (var connection = new MySqlConnection(connectionString))
 			{
 				string sql = @$"
-					SELECT IdPropietario, Nombre, Apellido, Dni, Telefono, Email, Clave
-					FROM Propietarios
+					SELECT Id_Propietario, Nombre, Apellido, Dni, Telefono, Email, Clave
+					FROM PROPIETARIOS
 					LIMIT {tamPagina} OFFSET {(paginaNro - 1) * tamPagina}
 				";
 				using (var command = new MySqlCommand(sql, connection))
@@ -134,7 +134,7 @@ namespace Brianzo_Inmobiliaria.Models
 					{
 						Propietario p = new Propietario
 						{
-							IdPropietario = reader.GetInt32(nameof(Propietario.IdPropietario)),//más seguro
+							Id_Propietario = reader.GetInt32(nameof(Propietario.Id_Propietario)),//más seguro
 							Nombre = reader.GetString("Nombre"),
 							Apellido = reader.GetString("Apellido"),
 							Dni = reader.GetString("Dni"),
@@ -157,8 +157,8 @@ namespace Brianzo_Inmobiliaria.Models
 			using (var connection = new MySqlConnection(connectionString))
 			{
 				string sql = @$"
-					SELECT COUNT(IdPropietario)
-					FROM Propietarios
+					SELECT COUNT(Id_Propietario)
+					FROM PROPIETARIOS
 				";
 				using (var command = new MySqlCommand(sql, connection))
 				{
@@ -181,9 +181,9 @@ namespace Brianzo_Inmobiliaria.Models
 			using (var connection = new MySqlConnection(connectionString))
 			{
 				string sql = @"SELECT 
-					IdPropietario, Nombre, Apellido, Dni, Telefono, Email, Clave 
-					FROM Propietarios
-					WHERE IdPropietario=@id";
+					Id_Propietario, Nombre, Apellido, Dni, Telefono, Email, Clave 
+					FROM PROPIETARIOS
+					WHERE Id_Propietario=@id";
 				using (var command = new MySqlCommand(sql, connection))
 				{
 					command.Parameters.Add("@id", DbType.Int32).Value = id;
@@ -194,7 +194,7 @@ namespace Brianzo_Inmobiliaria.Models
 					{
 						p = new Propietario
 						{
-							IdPropietario = reader.GetInt32(nameof(Propietario.IdPropietario)),
+							Id_Propietario = reader.GetInt32(nameof(Propietario.Id_Propietario)),
 							Nombre = reader.GetString("Nombre"),
 							Apellido = reader.GetString("Apellido"),
 							Dni = reader.GetString("Dni"),
@@ -215,8 +215,8 @@ namespace Brianzo_Inmobiliaria.Models
 			using (var connection = new MySqlConnection(connectionString))
 			{
 				string sql = @$"SELECT 
-					{nameof(Propietario.IdPropietario)}, Nombre, Apellido, Dni, Telefono, Email, Clave 
-					FROM Propietarios
+					{nameof(Propietario.Id_Propietario)}, Nombre, Apellido, Dni, Telefono, Email, Clave 
+					FROM PROPIETARIOS
 					WHERE Email=@email";
 				using (var command = new MySqlCommand(sql, connection))
 				{
@@ -228,7 +228,7 @@ namespace Brianzo_Inmobiliaria.Models
 					{
 						p = new Propietario
 						{
-							IdPropietario = reader.GetInt32(nameof(Propietario.IdPropietario)),//más seguro
+							Id_Propietario = reader.GetInt32(nameof(Propietario.Id_Propietario)),//más seguro
 							Nombre = reader.GetString("Nombre"),
 							Apellido = reader.GetString("Apellido"),
 							Dni = reader.GetString("Dni"),
@@ -251,8 +251,8 @@ namespace Brianzo_Inmobiliaria.Models
 			using (var connection = new MySqlConnection(connectionString))
 			{
 				string sql = @"SELECT
-					IdPropietario, Nombre, Apellido, Dni, Telefono, Email, Clave 
-					FROM Propietarios
+					Id_Propietario, Nombre, Apellido, Dni, Telefono, Email, Clave 
+					FROM PROPIETARIOS
 					WHERE Nombre LIKE @nombre OR Apellido LIKE @nombre";
 				using (var command = new MySqlCommand(sql, connection))
 				{
@@ -264,7 +264,7 @@ namespace Brianzo_Inmobiliaria.Models
 					{
 						p = new Propietario
 						{
-							IdPropietario = reader.GetInt32(nameof(Propietario.IdPropietario)),
+							Id_Propietario = reader.GetInt32(nameof(Propietario.Id_Propietario)),
 							Nombre = reader.GetString("Nombre"),
 							Apellido = reader.GetString("Apellido"),
 							Dni = reader.GetString("Dni"),
