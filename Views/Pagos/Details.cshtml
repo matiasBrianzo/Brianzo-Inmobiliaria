@@ -1,0 +1,55 @@
+@model Brianzo_Inmobiliaria.Models.Pago
+
+@{
+    ViewData["Title"] = "Detalles de Pagos";
+}
+
+<h2>Detalles de Pago</h2>
+    <hr />
+
+    <div class="card">
+  <div class="card-header">
+    Detalles de Pago
+  </div>
+  <div class="card-body">
+    
+<div>
+
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Id_Pago)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Id_Pago)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Importe)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Importe)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Id_Contrato)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Id_Contrato)
+        </dd>
+    </dl>
+</div>
+
+  </div>
+</div>
+
+
+
+<div>
+    <br>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id_Pago }, new { @class="btn btn-warning"}) |
+    <a asp-action="Index" class="btn btn-secondary">Volver al listado</a>
+</div>

@@ -1,0 +1,82 @@
+@model IEnumerable<Brianzo_Inmobiliaria.Models.Contrato>
+
+@{
+    ViewData["Title"] = "Ver Contratos";
+}
+
+<h2>Ver contratos para el inquilino</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Crear nuevo contrato</a>
+</p>
+
+<div class="card">
+  <div class="card-header">
+    Ver contratos para el inquilino
+  </div>
+  <div class="card-body">
+    
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id_Contrato)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fecha_Inicio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fecha_Fin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Monto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Id_Inmueble)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Id_Inquilino)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id_Contrato)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha_Inicio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha_Fin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Monto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Inmueble.Direccion)
+            </td>
+            <td>
+                @(item.Inquilino.Nombre + ' ' +  item.Inquilino.Apellido)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id=item.Id_Contrato}, new { @class="btn btn-warning"}) |
+                @Html.ActionLink("Detalles", "Details", new { id=item.Id_Contrato }, new { @class="btn btn-info"}) |
+                @Html.ActionLink("Eliminar", "Delete", new { id=item.Id_Contrato }, new { @class="btn btn-danger"}) |
+                @Html.ActionLink("Pagar", "PagoPorContrato", "Pagos", new { id=item.Id_Contrato ,id_inquilino=item.Id_Inquilino }, new { @class="btn btn-outline-primary"}) |
+                @if(DateTime.Now >= item.Fecha_Inicio && DateTime.Now <= item.Fecha_Fin){
+                   @Html.ActionLink("Finalizar", "FinalizarContrato", "Contratos", new { id=item.Id_Contrato,id_inquilino=item.Id_Inquilino }, new { @class="btn btn-outline-danger"})     
+                }
+                
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+
+  </div>
+</div>
+

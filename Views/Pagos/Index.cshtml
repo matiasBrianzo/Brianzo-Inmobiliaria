@@ -1,0 +1,93 @@
+@model IEnumerable<Brianzo_Inmobiliaria.Models.Pago>
+
+@{
+    ViewData["Title"] = "Listado de Pagos";
+}
+
+<h2>Listado de Pagos</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Realizar nuevo pago</a>
+</p>
+
+@if(TempData["creado"] !=  null){
+    <div class="alert alert-success" role="alert">
+    Pago Creado Exitosamente
+    </div>
+}
+
+
+@if(TempData["eliminado"] !=  null){
+<div class="alert alert-danger" role="alert">
+    Pago Eliminado Exitosamente
+</div>
+}
+
+@if(TempData["editado"] !=  null){
+<div class="alert alert-warning" role="alert">
+    Pago Editado Exitosamente
+</div>
+}
+
+@if(TempData["Otro"] !=  null){
+<div class="alert alert-danger" role="alert">
+    @TempData["Otro"]
+</div>
+}
+
+<div class="card">
+  <div class="card-header">
+    Listado de Pagos
+  </div>
+  <div class="card-body">
+    
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id_Pago)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fecha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Importe)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Id_Contrato)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id_Pago)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Importe)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id_Contrato)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new {id=item.Id_Pago}, new { @class="btn btn-warning"}) |
+                @Html.ActionLink("Detalles", "Details", new {id=item.Id_Pago }, new { @class="btn btn-info"}) |
+                @if(User.IsInRole("Administrador")){
+                    @Html.ActionLink("Eliminar", "Delete", new { id=item.Id_Pago }, new { @class="btn btn-danger"})
+                }               
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+
+
+  </div>
+</div>
+

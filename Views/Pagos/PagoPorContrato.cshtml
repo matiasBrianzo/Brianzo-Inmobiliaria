@@ -1,0 +1,115 @@
+@model Brianzo_Inmobiliaria.Models.Pago
+
+@{
+    ViewData["Title"] = "Create";
+    var ListaPagos = (List<Pago>)ViewBag.ListaPagos;
+    var id_inquilino = (int)(ViewBag.id_inquilino != null? ViewBag.id_inquilino : 0 );
+}
+
+<h2>Realizar Pagos</h2>
+
+<p>Listar los pagos realizados para un contrato en particular. Permitir
+cargar un nuevo pago a ese contrato desde la pantalla del listado.</p>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+<div class="card">
+  <div class="card-header">
+    Pago de Contrato
+  </div>
+  <div class="card-body">
+     <form asp-action="PagoPorContrato">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Fecha" class="control-label"></label>
+                <input asp-for="Fecha" class="form-control" />
+                <span asp-validation-for="Fecha" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Importe" class="control-label"></label>
+                <input asp-for="Importe" class="form-control" />
+                <span asp-validation-for="Importe" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Id_Contrato" type="hidden" value="@(ViewBag.Id_Contrato)" class="form-control" />
+            </div>
+            <div class="form-group">
+                <br>
+                <input type="submit" value="Pagar" class="btn btn-primary" />
+            </div>
+        </form>
+
+
+  </div>
+</div>
+
+
+       
+
+    </div>
+    <div class="col-md-8">
+
+<div class="card">
+  <div class="card-header">
+    Lista de Pagos para este Contrato
+  </div>
+  <div class="card-body">
+     <table class="table">
+    <thead>
+        <tr>
+            <th>
+                Nro Pago
+            </th>
+            <th>
+                Fecha
+            </th>
+            <th>
+                Importe
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in ListaPagos) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id_Pago)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fecha)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Importe)
+                </td>
+
+            </tr>
+    }
+    </tbody>
+</table>
+
+
+  </div>
+</div>
+
+
+           
+
+
+    </div>
+</div>
+<br>
+
+<div>
+ @if(id_inquilino > 0){
+      <a asp-controller="Contratos" asp-action="ContratosPorInquilino"  asp-route-id="@id_inquilino" class="btn btn-secondary">Volver al Listado</a>
+ }
+ else{
+     <a asp-controller="Contratos"  asp-action="Index" class="btn btn-secondary">Volver al listado</a>
+ }
+</div>
+
+
+<div>
+  
+</div>
+

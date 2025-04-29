@@ -1,0 +1,53 @@
+@model Brianzo_Inmobiliaria.Models.Pago
+
+@{
+    ViewData["Title"] = "Realizar Pago";
+}
+
+<h2>Realizar Pago</h2>
+<hr />
+
+<div class="card">
+  <div class="card-header">
+    Realizar Pago
+  </div>
+  <div class="card-body">
+    
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Fecha" class="control-label"></label>
+                <input asp-for="Fecha" class="form-control" />
+                <span asp-validation-for="Fecha" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Importe" class="control-label"></label>
+                <input asp-for="Importe" class="form-control" />
+                <span asp-validation-for="Importe" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Id_Contrato" class="control-label"></label>
+                <input asp-for="Id_Contrato" class="form-control" />
+                <span asp-validation-for="Id_Contrato" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <br>
+                <input type="submit" value="Crear" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+  </div>
+</div>
+
+<br>
+
+<div>
+    <a asp-action="Index"  class="btn btn-secondary">Volver al listado</a>
+</div>
+

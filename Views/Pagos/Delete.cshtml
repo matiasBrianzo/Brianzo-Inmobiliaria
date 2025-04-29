@@ -1,0 +1,54 @@
+@model Brianzo_Inmobiliaria.Models.Pago
+
+@{
+    ViewData["Title"] = "Eliminar Pago";
+}
+
+<h2>Eliminar Pagos</h2>
+
+<div class="card">
+  <div class="card-header">
+    Eliminar Pagos
+  </div>
+  <div class="card-body">
+    
+<div>
+    <p>Seguro que desea eliminar este pago?</p>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Id_Pago)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Id_Pago)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Fecha)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Fecha)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Importe)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Importe)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Id_Contrato)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Id_Contrato)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+        <a asp-action="Index" class="btn btn-secondary">Volver al listado</a>
+    </form>
+</div>
+
+  </div>
+</div>
+
+

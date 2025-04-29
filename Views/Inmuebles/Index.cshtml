@@ -1,0 +1,118 @@
+@model IEnumerable<Brianzo_Inmobiliaria.Models.Inmueble>
+
+@{
+    ViewData["Title"] = "Listado de Inmuebles";
+}
+
+<h2>Listado de Inmuebles</h2>
+
+<p>
+    <a asp-action="Create"class="btn btn-primary">Crear nuevo inmueble</a>
+</p>
+
+
+
+@if(TempData["creado"] !=  null){
+    <div class="alert alert-success" role="alert">
+    Inmueble Creado Exitosamente
+    </div>
+}
+
+
+@if(TempData["eliminado"] !=  null){
+<div class="alert alert-danger" role="alert">
+    Inmueble Eliminado Exitosamente
+</div>
+}
+
+@if(TempData["editado"] !=  null){
+<div class="alert alert-warning" role="alert">
+    Inmueble Editado Exitosamente
+</div>
+}
+
+@if(TempData["Otro"] !=  null){
+<div class="alert alert-danger" role="alert">
+    @TempData["Otro"]
+</div>
+}
+
+<div class="card">
+  <div class="card-header">
+    Listado de Inmuebles
+  </div>
+  <div class="card-body">
+    <table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id_Inmueble)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Direccion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ambientes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Activo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Uso.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tipo.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Id_Propietario)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id_Inmueble)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Direccion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ambientes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precio)
+            </td>
+            <td>
+                @(item.Activo==true ? "Si" : "No")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Uso.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tipo.Nombre)
+            </td>
+            <td>
+                @(item.Titular.Nombre + ' ' +  item.Titular.Apellido)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id=item.Id_Inmueble }, new { @class="btn btn-warning"}) |
+                @Html.ActionLink("Detalles", "Details", new { id=item.Id_Inmueble }, new { @class="btn btn-info"}) |
+                 @Html.ActionLink("Eliminar", "Delete", new { id=item.Id_Inmueble }, new { @class="btn btn-danger"}) 
+                           
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+
+  </div>
+</div>
+
+
+

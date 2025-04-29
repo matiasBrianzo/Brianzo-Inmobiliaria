@@ -1,0 +1,106 @@
+@model Brianzo_Inmobiliaria.Models.Inmueble
+
+@{
+    ViewData["Title"] = "Editar Inmueble";
+    var listaPropietarios = (List<Propietario>)ViewBag.listaPropietarios;
+    var listaUsos = (List<Uso>)ViewBag.listaUsos;
+    var listaTipos = (List<Tipo>)ViewBag.listaTipos;    
+}
+
+<h2>Editar Inmueble</h2>
+<hr />
+
+<div class="card">
+  <div class="card-header">
+    Editar Inmueble
+  </div>
+  <div class="card-body">
+    <div class="row">
+    <div class="col-md-12">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" name="Id_Inmueble" value="@Model.Id_Inmueble" />
+            <div class="form-group">
+                <label asp-for="Direccion" class="control-label"></label>
+                <input asp-for="Direccion" class="form-control" />
+                <span asp-validation-for="Direccion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ambientes" class="control-label"></label>
+                <input asp-for="Ambientes" class="form-control" />
+                <span asp-validation-for="Ambientes" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Latitud" class="control-label"></label>
+                <input asp-for="Latitud" class="form-control" />
+                <span asp-validation-for="Latitud" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Longitud" class="control-label"></label>
+                <input asp-for="Longitud" class="form-control" />
+                <span asp-validation-for="Longitud" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Precio" class="control-label"></label>
+                <input asp-for="Precio" class="form-control" />
+                <span asp-validation-for="Precio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Activo" class="control-label"></label>
+                 <select class="form-control" name="Activo">
+                    @{
+                       @:<option @(Model.Activo==true ? "selected" : "") value="True">Si</option>
+                       @:<option @(Model.Activo==false ? "selected" : "") value="False">No</option>
+                    }
+                </select>
+                <span asp-validation-for="Activo" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
+                <label class="control-label">Usos de inmueble</label>
+                <select class="form-control" name="Id_Uso">
+                    @foreach (var item in listaUsos)
+                    {
+                        @:<option @(item.Id_Uso==Model.Id_Uso ? "selected" : "") value="@item.Id_Uso">@(item.Nombre)</option>
+                    }
+                </select>
+                <span asp-validation-for="Id_Propietario" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Tipos de inmueble</label>
+                <select class="form-control" name="Id_Tipo">
+                    @foreach (var item in listaTipos)
+                    {
+                        @:<option @(item.Id_Tipo==Model.Id_Tipo ? "selected" : "") value="@item.Id_Tipo">@(item.Nombre)</option>
+                    }
+                </select>
+                <span asp-validation-for="Id_Propietario" class="text-danger"></span>
+            </div>
+             <div class="form-group">
+                <label class="control-label">Propietario</label>
+                <select class="form-control" name="Id_Propietario">
+                    @foreach (var item in listaPropietarios)
+                    {
+                        @:<option @(item.Id_Propietario==Model.Id_Propietario ? "selected" : "") value="@item.Id_Propietario">@(item.Nombre + " " + item.Apellido)</option>
+                    }
+                </select>
+                <span asp-validation-for="Id_Propietario" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <br>
+                <input type="submit" value="Editar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+  </div>
+</div>
+<br>
+
+<div>
+    <a asp-action="Index" class="btn btn-secondary">Volver al listado</a>
+</div>
+

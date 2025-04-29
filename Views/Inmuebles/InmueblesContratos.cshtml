@@ -1,0 +1,133 @@
+@model IEnumerable<Brianzo_Inmobiliaria.Models.Inmueble>
+
+@{
+    ViewData["Title"] = "Listado de Inmuebles";  
+}
+
+<h2>Inmuebles Disponibles por Fecha</h2>
+
+<p>Dadas dos fechas posibles de un contrato (inicio y fin), listar todos
+los inmuebles que no estén ocupados en algún contrato entre esas
+fechas.</p>
+
+<div class="card">
+  <div class="card-header">
+    Filtros
+  </div>
+  <div class="card-body">
+    
+
+    <form asp-action="InmueblesContratos">
+
+        <div class="row">
+                <div class="col-md-2">
+                    <label class="control-label">Fecha Desde</label>
+                    <input type="date" name="Fecha_Inicio" required class="form-control" />
+                </div>
+                 <div class="col-md-2">
+                    <label class="control-label">Fecha Hasta</label>
+                    <input type="date" name="Fecha_Fin" required class="form-control" />
+                </div>
+                 <div class="col-md-1 mt-4">
+                    <input type="submit" value="Filtrar" class="btn btn-primary" />
+                </div>
+        </div>
+ </form>
+
+  </div>
+</div>
+
+
+
+<br>
+<div class="card">
+  <div class="card-header">
+    Inmuebles Disponibles por Fecha
+  </div>
+  <div class="card-body">
+    
+<div class="row">
+    <div class="col-md-12">
+
+        <table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id_Inmueble)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Direccion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ambientes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Latitud)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Longitud)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Activo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Uso.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tipo.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Id_Propietario)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id_Inmueble)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Direccion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ambientes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Latitud)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Longitud)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precio)
+            </td>
+            <td>
+                @(item.Activo==true ? "Si" : "No")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Uso.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tipo.Nombre)
+            </td>
+            <td>
+                @(item.Titular.Nombre + ' ' +  item.Titular.Apellido)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+
+
+    </div>
+</div>
+
+
+  </div>
+</div>
+

@@ -5,9 +5,9 @@ using MySqlConnector;
 
 namespace Brianzo_Inmobiliaria.Models
 {
-	public class RepositorioInquilinoMySql : RepositorioBase, IRepositorioInquilino
+	public class RepositorioInquilino : RepositorioBase, IRepositorioInquilino
 	{
-		public RepositorioInquilinoMySql(IConfiguration configuration) : base(configuration)
+		public RepositorioInquilino(IConfiguration configuration) : base(configuration)
 		{
 			//https://www.nuget.org/packages/Pomelo.EntityFrameworkCore.MySql/
 		}
