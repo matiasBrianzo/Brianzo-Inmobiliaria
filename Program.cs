@@ -42,7 +42,7 @@ builder.Services.AddScoped<IRepositorioTipo, RepositorioTipo>();
 builder.Services.AddScoped<IRepositorioUso, RepositorioUso>();
 builder.Services.AddScoped<IRepositorioContrato, RepositorioContrato>();
 builder.Services.AddScoped<IRepositorioPago, RepositorioPago>();
-builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
+//builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
 
 var app = builder.Build();
 app.UseHttpsRedirection();//comentar para trabajar con http solo
