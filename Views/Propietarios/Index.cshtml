@@ -64,9 +64,11 @@
 						<a class="btn btn-primary" asp-action="Details" asp-route-id="@item.Id_Propietario" title="Detalle">
 							<i class="fa-solid fa-eye"></i>
 						</a>
+						  @if(User.IsInRole("Administrador")){
 						<a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id_Propietario" title="Eliminar">
 							<i class="fa-solid fa-trash-can"></i>
-						</a>						
+						</a>
+						 }						
 					</div>
 					
 				</td>

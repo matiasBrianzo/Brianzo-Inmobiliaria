@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Brianzo_Inmobiliaria.Models;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.WebHost.UseUrls("http://localhost:5000","https://localhost:5001", "http://*:5000", "https://*:5001");
+//builder.WebHost.UseUrls("http://localhost:5000","https://localhost:5001", "http://*:5000", "https://*:5001");
 
 var configuration = builder.Configuration;
 
@@ -17,17 +17,19 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 		options.AccessDeniedPath = "/Home/Restringido";
 		//options.ExpireTimeSpan = TimeSpan.FromMinutes(5);//Tiempo de expiración
 	});
-	
+
 builder.Services.AddAuthorization(options =>
 {
-	//options.AddPolicy("Empleado", policy => policy.RequireClaim(ClaimTypes.Role, "Administrador", "Empleado"));
-	options.AddPolicy("Administrador", policy => policy.RequireRole("Administrador", "Administrador"));
+	options.AddPolicy("Administrador", policy =>
+		policy.RequireRole("Administrador")
+	);
 });
+
 builder.Services.AddMvc();
 builder.Services.AddSignalR();//añade signalR
-//IUserIdProvider permite cambiar el ClaimType usado para obtener el UserIdentifier en Hub
-//builder.Services.AddSingleton<IUserIdProvider, UserIdProvider>();
-// SOLO PARA INYECCIÓN DE DEPENDECIAS:
+							  //IUserIdProvider permite cambiar el ClaimType usado para obtener el UserIdentifier en Hub
+							  //builder.Services.AddSingleton<IUserIdProvider, UserIdProvider>();
+							  // SOLO PARA INYECCIÓN DE DEPENDECIAS:
 /*
 Transient objects are always different; a new instance is provided to every controller and every service.
 Scoped objects are the same within a request, but different across different requests.
@@ -42,7 +44,7 @@ builder.Services.AddScoped<IRepositorioTipo, RepositorioTipo>();
 builder.Services.AddScoped<IRepositorioUso, RepositorioUso>();
 builder.Services.AddScoped<IRepositorioContrato, RepositorioContrato>();
 builder.Services.AddScoped<IRepositorioPago, RepositorioPago>();
-//builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
+builder.Services.AddScoped<IRepositorioUsuario, RepositorioUsuario>();
 
 var app = builder.Build();
 app.UseHttpsRedirection();//comentar para trabajar con http solo
@@ -63,9 +65,9 @@ app.UseCookiePolicy(new CookiePolicyOptions
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+	app.UseExceptionHandler("/Home/Error");
+	// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+	app.UseHsts();
 }
 
 app.UseHttpsRedirection();
@@ -77,11 +79,11 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+	name: "default",
+	pattern: "{controller=Home}/{action=Index}/{id?}");
 app.MapControllerRoute("login", "entrar/{**accion}", new { controller = "Usuarios", action = "Login" });
-app.MapControllerRoute("rutaFija", "ruteo/{valor}", new { controller = "Home", action = "Ruta", valor = "defecto" });
-app.MapControllerRoute("fechas", "{controller=Home}/{action=Fecha}/{anio}/{mes}/{dia}");
-app.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
+// app.MapControllerRoute("rutaFija", "ruteo/{valor}", new { controller = "Home", action = "Ruta", valor = "defecto" });
+// app.MapControllerRoute("fechas", "{controller=Home}/{action=Fecha}/{anio}/{mes}/{dia}");
+// app.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

@@ -1,8 +1,19 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Pagina Principal";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+ @if(User.IsInRole("Administrador")){                   
+                    <img src="/uploads/admin-login.jpg" class="img-fluid" alt="Responsive image">
+                }
+                else {
+                   <img src="/uploads/User-login.jpg" class="img-fluid" alt="Responsive image">
+                }
+  
+
+   <div class="jumbotron">
+  <h1 class="display-4">Bienvenido a Inmobiliaria</h1>
+  <p class="lead">Sistema creado para Programación .NET</p>
+  <hr class="my-4">
+</div>
 </div>

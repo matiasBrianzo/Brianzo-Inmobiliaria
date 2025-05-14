@@ -1,4 +1,5 @@
 using Brianzo_Inmobiliaria.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Brianzo_Inmobiliaria.Controllers;
@@ -10,15 +11,11 @@ public class PropietariosController : Controller
 
 	public PropietariosController(IRepositorioPropietario repo, IConfiguration config)
 	{
-		// Sin inyección de dependencias y sin usar el config (quitar el parámetro repo del ctor)
-		//this.repositorio = new RepositorioPropietario();
-		// Sin inyección de dependencias y pasando el config (quitar el parámetro repo del ctor)
-		//this.repositorio = new RepositorioPropietario(config);
-		// Con inyección de dependencias
 		this.repositorio = repo;
 		this.config = config;
 	}
 
+	[Authorize]
 	// GET: Propietario
 	[Route("[controller]/Index")]
 	public ActionResult Index()
@@ -27,17 +24,14 @@ public class PropietariosController : Controller
 		{
 			var lista = repositorio.ObtenerTodos();
 			ViewBag.Id = TempData["Id"];
-			// TempData es para pasar datos entre acciones
-			// ViewBag/Data es para pasar datos del controlador a la vista
-			// Si viene alguno valor por el tempdata, lo paso al viewdata/viewbag
 			if (TempData.ContainsKey("Mensaje"))
 				ViewBag.Mensaje = TempData["Mensaje"];
 			return View(lista);
 		}
 		catch (Exception ex)
 		{// Poner breakpoints para detectar errores
-			
-			throw  ;
+
+			throw;
 		}
 	}
 	// GET: PROPIETARIOS/Details/5
@@ -51,8 +45,8 @@ public class PropietariosController : Controller
 		}
 		catch (Exception ex)
 		{// Poner breakpoints para detectar errores
-			
-			throw  ;
+
+			throw;
 		}
 	}
 	// GET: Propietario
@@ -76,8 +70,8 @@ public class PropietariosController : Controller
 		}
 		catch (Exception ex)
 		{// Poner breakpoints para detectar errores
-			
-			throw  ;
+
+			throw;
 		}
 	}
 
@@ -92,18 +86,16 @@ public class PropietariosController : Controller
 		}
 		catch (Exception ex)
 		{//poner breakpoints para detectar errores
-			
-			throw  ;
+
+			throw;
 		}
 	}
 
 	// POST: Propietario/Edit/5
 	[HttpPost]
 	[ValidateAntiForgeryToken]
-	//public ActionResult Edit(int id, IFormCollection collection)
 	public ActionResult Edit(int id, Propietario entidad)
 	{
-		// Si en lugar de IFormCollection ponemos Propietario, el enlace de datos lo hace el sistema
 		Propietario? p = null;
 		try
 		{
@@ -120,8 +112,8 @@ public class PropietariosController : Controller
 		}
 		catch (Exception ex)
 		{//poner breakpoints para detectar errores
-			
-			throw  ;
+
+			throw;
 		}
 	}
 
@@ -149,26 +141,19 @@ public class PropietariosController : Controller
 		}
 		catch (Exception ex)
 		{//poner breakpoints para detectar errores
-			
-			throw  ;
+
+			throw;
 		}
 	}
 	// POST: Propietario/Create
 	[HttpPost]
-	//[ValidateAntiForgeryToken]
+	[ValidateAntiForgeryToken]
 	public ActionResult Create(Propietario propietario)
 	{
 		try
 		{
 			if (ModelState.IsValid)// Pregunta si el modelo es válido
 			{
-				// Reemplazo de clave plana por clave con hash
-				/*propietario.Clave = Convert.ToBase64String(KeyDerivation.Pbkdf2(
-						password: propietario.Clave,
-						salt: System.Text.Encoding.ASCII.GetBytes(config["Salt"]),
-						prf: KeyDerivationPrf.HMACSHA1,
-						iterationCount: 1000,
-						numBytesRequested: 256 / 8));*/
 				repositorio.Alta(propietario);
 				TempData["Id"] = propietario.Id_Propietario;
 				TempData["creado"] = "Si";
@@ -179,12 +164,14 @@ public class PropietariosController : Controller
 		}
 		catch (Exception ex)
 		{//poner breakpoints para detectar errores
-			
-			throw  ;
+
+			throw;
 		}
 	}
 
 	// GET: Propietario/Delete/5
+	[Authorize(policy: "Administrador")]
+	[HttpGet]
 	public ActionResult Delete(int id)
 	{
 		try
@@ -194,12 +181,13 @@ public class PropietariosController : Controller
 		}
 		catch (Exception ex)
 		{//poner breakpoints para detectar errores
-			
-			throw  ;
+
+			throw;
 		}
 	}
 
 	// POST: Propietario/Delete/5
+	[Authorize(policy: "Administrador")]
 	[HttpPost]
 	[ValidateAntiForgeryToken]
 	public ActionResult Delete(int id, Propietario entidad)
@@ -212,8 +200,8 @@ public class PropietariosController : Controller
 		}
 		catch (Exception ex)
 		{//poner breakpoints para detectar errores
-			
-			throw  ;
+
+			throw;
 		}
 	}
 

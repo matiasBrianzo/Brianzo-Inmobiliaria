@@ -1,0 +1,72 @@
+@model Brianzo_Inmobiliaria.Models.Usuario
+
+@{
+    ViewData["Title"] = "Detalles de Usuario";
+}
+
+<h2>Detalles de Usuario</h2>
+
+<div class="card">
+  <div class="card-header">
+    Detalles de Usuario
+
+  </div>
+  <div class="card-body">
+    
+<div>
+    <h4>Usuario</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Id_Usuario)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Id_Usuario)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Apellido)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Apellido)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Mail)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Mail)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
+        <dd class = "col-sm-10">
+            *******
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Rol)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Rol)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Avatar)
+        </dt>
+        <dd class = "col-sm-10">
+            <img src="@(Model.Avatar == "" ? "/Uploads/av1.jpg" : Model.Avatar)" class="rounded-circle" style="width: 80px;height: 80px;" alt="Avatar" />
+        </dd>
+    </dl>
+</div>
+
+
+  </div>
+</div>
+<br>
+<div>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id_Usuario}, new { @class="btn btn-warning"}) |
+    <a asp-action="Index" class="btn btn-secondary">Volver al listado</a>
+</div>

@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Brianzo_Inmobiliaria.Controllers
 {
-    //  [Authorize]
+    [Authorize]
     public class ContratosController : Controller
     {
         private readonly IRepositorioContrato repoContrato;
@@ -94,7 +94,7 @@ namespace Brianzo_Inmobiliaria.Controllers
         }
 
         // GET: Contratos/Delete/5
-        //[Authorize(policy: "Administrador")]
+        [Authorize(policy: "Administrador")]
         [HttpGet]
         public ActionResult Delete(int id)
         {
@@ -103,7 +103,7 @@ namespace Brianzo_Inmobiliaria.Controllers
         }
 
         // POST: Contratos/Delete/5
-        //   [Authorize(policy: "Administrador")]
+        [Authorize(policy: "Administrador")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, Contrato contrato)

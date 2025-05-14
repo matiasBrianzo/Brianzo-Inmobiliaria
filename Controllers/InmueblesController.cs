@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Brianzo_Inmobiliaria.Controllers;
 
-//[Authorize]
+[Authorize]
 public class InmueblesController : Controller
 {
 
@@ -27,7 +27,7 @@ public class InmueblesController : Controller
         this.repoPropietario = repoPro;
         this.config = config;
     }
-    
+
     // GET: Inmuebles
     [Route("[controller]/Index")]
     public ActionResult Index()
@@ -60,8 +60,8 @@ public class InmueblesController : Controller
         ViewBag.listaUsos = repoUso.ObtenerTodos();
         return View();
     }
-    // POST: Inmuebles/Create
 
+    // POST: Inmuebles/Create
     [ValidateAntiForgeryToken]
     public ActionResult Create(Inmueble inmueble)
     {
@@ -73,7 +73,6 @@ public class InmueblesController : Controller
     }
 
     // GET: Inmuebles/Edit/5
-
     public ActionResult Edit(int id)
     {
         ViewBag.listaPropietarios = repoPropietario.ObtenerTodos();
@@ -97,8 +96,8 @@ public class InmueblesController : Controller
     }
 
     // GET: Inmuebles/Delete/5
-    //  [Authorize(policy:"Administrador")]
-
+    [Authorize(policy: "Administrador")]
+    [HttpGet]
     public ActionResult Delete(int id)
     {
         var lista = repoInmuble.ObtenerPorId(id);
@@ -108,8 +107,8 @@ public class InmueblesController : Controller
     }
 
     // POST: Inmuebles/Delete/5
-    //    [Authorize(policy:"Administrador")]
-
+    [Authorize(policy: "Administrador")]
+[HttpPost]
     [ValidateAntiForgeryToken]
     public ActionResult Delete(int id, Inmueble inmueble)
     {
@@ -117,6 +116,7 @@ public class InmueblesController : Controller
         TempData["Eliminado"] = "Si";
         return RedirectToAction(nameof(Index));
     }
+    
     [HttpGet]
     public ActionResult BuscarInmuebles()
     {

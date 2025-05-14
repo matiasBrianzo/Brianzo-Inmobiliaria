@@ -1,0 +1,78 @@
+@model Brianzo_Inmobiliaria.Models.Usuario
+
+@{
+    ViewData["Title"] = "Editar Perfil";
+}
+
+<h2>Editar Perfil</h2>
+<hr />
+
+
+
+@if (TempData["editado"] != null)
+{
+    <div class="alert alert-warning" role="alert">
+        Usuario Editado Exitosamente
+    </div>
+}
+
+
+
+<div class="card">
+    <div class="card-header">
+        Editar Perfil
+    </div>
+    <div class="card-body">
+
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="EditarPerfil" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" name="Id_Usuario" value="@Model.Id_Usuario" />
+                    <div class="form-group">
+                        <label asp-for="Apellido" class="control-label"></label>
+                        <input asp-for="Apellido" class="form-control" />
+                        <span asp-validation-for="Apellido" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Nombre" class="control-label"></label>
+                        <input asp-for="Nombre" class="form-control" />
+                        <span asp-validation-for="Nombre" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Mail" class="control-label"></label>
+                        <input asp-for="Mail" class="form-control" />
+                        <span asp-validation-for="Mail" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Rol" class="control-label"></label>
+                        <select class="form-control" name="Rol">
+                            @{
+                                @if (User.IsInRole("Administrador"))
+                                {
+                                    @:<option @(Model.Rol == 1 ? "selected" : "") value="1">Administrador</option>
+                                }
+                                @:<option @(Model.Rol != 1 ? "selected" : "") value="2">Empleado</option>
+                            }
+                        </select>
+                        <span asp-validation-for="Rol" class="text-danger"></span>
+                    </div><img src="@(Model.Avatar == "" ? "/Uploads/av1.jpg" : Model.Avatar)" class="rounded-circle"
+                        style="width: 80px;height: 80px;" alt="Avatar" />
+                    <div class="form-group">
+                        <label asp-for="AvatarFile" class="control-label"></label>
+                        <input asp-for="AvatarFile" class="form-control" />
+                        <span asp-validation-for="AvatarFile" class="text-danger"></span>
+                    </div>
+                    <input asp-for="Avatar" class="form-control" type="hidden" />
+                    <div class="form-group">
+                        <input type="submit" value="Editar" class="btn btn-warning" />
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+<br>
