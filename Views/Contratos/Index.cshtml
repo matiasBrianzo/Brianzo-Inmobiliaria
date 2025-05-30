@@ -4,11 +4,12 @@
     ViewData["Title"] = "Listado de Contratos";
 }
 
-<h2>Listado de Contratos</h2>
+<h2>Listado de Contratos
 
-<p>
-    <a asp-action="Create" class="btn btn-primary">Crear nuevo contrato</a>
-</p>
+<div class="btn-group pull-right">
+		<a class="btn btn-primary" asp-action="Create" title="Crear nuevo contrato"><i class="fa-solid fa-plus"></i></a>
+</div>
+</h2>
 
 @if(TempData["creado"] !=  null){
     <div class="alert alert-success" role="alert">
@@ -88,22 +89,40 @@
                 @(item.Inquilino.Nombre + ' ' +  item.Inquilino.Apellido)
             </td>
             <td>
-                @Html.ActionLink("Editar", "Edit", new { id=item.Id_Contrato}, new { @class="btn btn-warning"}) |
-                @Html.ActionLink("Detalles", "Details", new { id=item.Id_Contrato }, new { @class="btn btn-info"}) |
-                @if(User.IsInRole("Administrador"))
-                {
-                    @Html.ActionLink("Eliminar", "Delete", new { id=item.Id_Contrato }, new { @class="btn btn-danger"})
-                }
-                 @Html.ActionLink("Pagar", "PagoPorContrato", "Pagos", new { id=item.Id_Contrato }, new { @class="btn btn-outline-primary"}) |
-
-                @if(DateTime.Now >= item.Fecha_Inicio && DateTime.Now <= item.Fecha_Fin){
-                   @Html.ActionLink("Finalizar", "FinalizarContrato", "Contratos", new { id=item.Id_Contrato }, new { @class="btn btn-outline-danger"})  
+                <div class="btn-group" role="group">
+                                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id_Contrato"
+                                    title="Editar">
+                                    <i class="fa-solid fa-pen"></i>
+                                </a>
+                                <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id_Contrato"
+                                    title="Detalles">
+                                    <i class="fa-solid fa-eye"></i>
+                                    
+                                </a>
+                                  @if(User.IsInRole("Administrador")){
+                                  <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id_Contrato"
+                                    title="Eliminar">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                  </a> 
+                                }   
+                                   <a class="btn btn-outline-primary" asp-controller="Pagos" asp-action="PagoPorContrato"  asp-route-id="@item.Id_Contrato"
+                                    title="Pagar">
+                                   <i class="fa-solid fa-money-check-dollar"></i>
+                                </a>
+                                
+                @if(DateTime.Now >= item.Fecha_Inicio && DateTime.Now <= item.Fecha_Fin){                  
+              <a class="btn btn-outline-danger" asp-controller="Contratos" asp-action="FinalizarContrato"  asp-route-id="@item.Id_Contrato"
+                                    title="Ver Contratos">
+                                   <i class="fa-solid fa-file"></i>
+                                </a>
                 } 
-
-                @if(DateTime.Now < item.Fecha_Inicio || DateTime.Now > item.Fecha_Fin){
-                   @Html.ActionLink("Renovar", "RenovarContrato", "Contratos", new { id_inquilino=item.Id_Inquilino,id_inmueble = item.Id_Inmueble }, new { @class="btn btn-outline-success"}) 
+                 @if(DateTime.Now < item.Fecha_Inicio || DateTime.Now > item.Fecha_Fin){
+                            @Html.ActionLink("Renovar", "RenovarContrato", "Contratos", new { id_inquilino=item.Id_Inquilino,id_inmueble = item.Id_Inmueble }, new { @class="btn btn-outline-success"}) 
+                
                 }
+                            </div>
             </td>
+
         </tr>
 }
     </tbody>

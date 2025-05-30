@@ -20,8 +20,8 @@ namespace Brianzo_Inmobiliaria.Models;
 			using (MySqlConnection conn = new MySqlConnection(connectionString))
 			{
 
-				var sql = @"INSERT INTO INMUEBLES(Direccion,Id_Uso,Id_Tipo,Ambientes,Latitud,Longitud,Precio,Activo,Id_Propietario)
-            VALUES (@Direccion,@Id_Uso,@Id_Tipo,@Ambientes,@Latitud,@Longitud,@Precio,@Activo,@Id_Propietario);
+				var sql = @"INSERT INTO INMUEBLES(Direccion,Id_Uso,Id_Tipo,Ambientes,Latitud,Longitud,Precio,Activo,Id_Propietario,Avatar)
+            VALUES (@Direccion,@Id_Uso,@Id_Tipo,@Ambientes,@Latitud,@Longitud,@Precio,@Activo,@Id_Propietario,@Avatar);
             SELECT LAST_INSERT_ID()";
 
 				using (MySqlCommand cmd = new MySqlCommand(sql, conn))
@@ -35,7 +35,14 @@ namespace Brianzo_Inmobiliaria.Models;
 					cmd.Parameters.AddWithValue("@Precio", inmueble.Precio);
 					cmd.Parameters.AddWithValue("@Activo", inmueble.Activo);
 					cmd.Parameters.AddWithValue("@Id_Propietario", inmueble.Id_Propietario);
-
+                if (string.IsNullOrEmpty(inmueble.Avatar))
+                {
+                    cmd.Parameters.AddWithValue("@Avatar", DBNull.Value);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@Avatar", inmueble.Avatar);
+                }
 					conn.Open();
 					res = Convert.ToInt32(cmd.ExecuteScalar());
 					inmueble.Id_Inmueble = res;
@@ -74,7 +81,7 @@ namespace Brianzo_Inmobiliaria.Models;
 			{
 				var sql = @"UPDATE INMUEBLES
             SET Direccion=@Direccion,Id_Uso=@Id_Uso,Id_Tipo=@Id_Tipo,Ambientes=@Ambientes,Latitud=@Latitud,Longitud=@Longitud,
-            Precio=@Precio,Activo=@Activo,Id_Propietario=@Id_Propietario 
+            Precio=@Precio,Activo=@Activo,Id_Propietario=@Id_Propietario,Avatar=@Avatar 
             WHERE Id_Inmueble = @id";
 
 				using (MySqlCommand cmd = new MySqlCommand(sql, conn))
@@ -88,6 +95,7 @@ namespace Brianzo_Inmobiliaria.Models;
 					cmd.Parameters.AddWithValue("@Precio", inmueble.Precio);
 					cmd.Parameters.AddWithValue("@Activo", inmueble.Activo);
 					cmd.Parameters.AddWithValue("@Id_Propietario", inmueble.Id_Propietario);
+					cmd.Parameters.AddWithValue("@Avatar", inmueble.Avatar);
 					cmd.Parameters.AddWithValue("@id", inmueble.Id_Inmueble);
 					conn.Open();
 					res = cmd.ExecuteNonQuery();
@@ -164,7 +172,7 @@ namespace Brianzo_Inmobiliaria.Models;
 
 			using (MySqlConnection conn = new MySqlConnection(connectionString))
 			{
-				var sql = @"SELECT i.Id_Inmueble,i.Direccion,i.Id_Uso,i.Id_Tipo,i.Ambientes,i.Latitud,i.Longitud,i.Precio,i.Activo,i.Id_Propietario,
+				var sql = @"SELECT i.Id_Inmueble,i.Direccion,i.Id_Uso,i.Id_Tipo,i.Ambientes,i.Latitud,i.Longitud,i.Precio,i.Activo,i.Id_Propietario,IFNULL(Avatar, '') Avatar,
             p.Nombre, p.Apellido, u.Nombre 'NombreUso', t.Nombre 'NombreTipo'
             FROM INMUEBLES i
             INNER JOIN PROPIETARIOS p ON i.Id_Propietario = p.Id_Propietario
@@ -192,6 +200,7 @@ namespace Brianzo_Inmobiliaria.Models;
 								Precio = reader.GetDecimal("Precio"),
 								Activo = reader.GetBoolean("Activo"),
 								Id_Propietario = reader.GetInt32("Id_Propietario"),
+								Avatar = reader.GetString("Avatar"),
 								Titular = new Propietario
 								{
 									Id_Propietario = reader.GetInt32("Id_Propietario"),

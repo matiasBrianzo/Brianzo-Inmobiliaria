@@ -17,7 +17,7 @@
   <div class="card-body">
     <div class="row">
     <div class="col-md-12">
-        <form asp-action="Edit">
+        <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" name="Id_Inmueble" value="@Model.Id_Inmueble" />
             <div class="form-group">
@@ -86,6 +86,13 @@
                 </select>
                 <span asp-validation-for="Id_Propietario" class="text-danger"></span>
             </div>
+             <img src="@(Model.Avatar == "" ? "/Uploads/casa1.png" : Model.Avatar)" class="rounded-circle" style="width: 100px;height: 100px;" alt="Avatar" />
+            <div class="form-group">
+                <label asp-for="AvatarFile" class="control-label"></label>
+                <input asp-for="AvatarFile" class="form-control" />
+                <span asp-validation-for="AvatarFile" class="text-danger"></span>
+            </div>
+            <input asp-for="Avatar" class="form-control" type="hidden" />
             <div class="form-group">
                 <br>
                 <input type="submit" value="Editar" class="btn btn-primary" />

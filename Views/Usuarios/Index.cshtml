@@ -4,11 +4,12 @@
     ViewData["Title"] = "Lista de Usuarios";
 }
 
-<h2>Lista de Usuarios</h2>
-
-<p>
-    <a asp-action="Create" class="btn btn-primary">Crear nuevo Usuario</a>
-</p>
+<h1>
+	Listado de Usuarios
+	<div class="btn-group pull-right">
+		<a class="btn btn-primary" asp-action="Create" title="Crear nuevo Usuario"><i class="fa-solid fa-plus"></i></a>
+	</div>
+</h1>
 
 
 @if(TempData["creado"] !=  null){
@@ -88,11 +89,25 @@
             <td>
                 <img src="@(item.Avatar == ""?"/Uploads/av1.jpg":item.Avatar)" class="rounded-circle" style="width: 30px;height: 30px;" alt="Avatar" />
             </td>
-            <td>
-                @Html.ActionLink("Editar", "Edit", new { id=item.Id_Usuario}, new { @class="btn btn-warning"}) |
-                @Html.ActionLink("Detalles", "Details", new { id=item.Id_Usuario}, new { @class="btn btn-info"}) |
-                @Html.ActionLink("Eliminar", "Delete", new { id=item.Id_Usuario }, new { @class="btn btn-danger"})
-            </td>
+             <td>           
+             <div class="btn-group" role="group">
+                                <a class="btn btn-warning" asp-action="Edit" asp-route-id="@item.Id_Usuario"
+                                    title="Editar">
+                                    <i class="fa-solid fa-pen"></i>
+                                </a>
+                                <a class="btn btn-info" asp-action="Details" asp-route-id="@item.Id_Usuario"
+                                    title="Detalle">
+                                    <i class="fa-solid fa-eye"></i>
+                                </a>
+                                  @if(User.IsInRole("Administrador")){
+                                  <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id_Usuario"
+                                    title="Eliminar">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                  </a> 
+                                }                              
+                                
+                            </div>  
+                             </td>
         </tr>
 }
     </tbody>

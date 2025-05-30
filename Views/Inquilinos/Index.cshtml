@@ -4,13 +4,13 @@
     ViewData["Title"] = "Listado de Inquilinos";
 }
 
-<h2>Listado de Inquilinos</h2>
 
-<p>
-    <a asp-action="Create" class="btn btn-primary">Crear nuevo inquilino</a>
-</p>
-
-
+<h1>
+	Listado de Inquilinos
+	<div class="btn-group pull-right">
+		<a class="btn btn-primary" asp-action="Create" title="Crear nuevo inquilino"><i class="fa-solid fa-plus"></i></a>
+	</div>
+</h1>
 @if (TempData["creado"] != null)
 {
     <div class="alert alert-success" role="alert">
@@ -83,7 +83,10 @@
                                     <i class="fa-solid fa-trash-can"></i>
                                   </a> 
                                 }                               
-                                 @Html.ActionLink("Ver Contratos", "ContratosPorInquilino","Contratos", new { id=item.Id_Inquilino }, new { @class="fa-solid fa-pen" }) |                                
+                                  <a class="btn btn-info" asp-controller="Contratos" asp-action="ContratosPorInquilino"  asp-route-id="@item.Id_Inquilino"
+                                    title="Ver Contratos">
+                                   <i class="fa-solid fa-file"></i>
+                                </a>
                             </div>
                         </td>
                     </tr>

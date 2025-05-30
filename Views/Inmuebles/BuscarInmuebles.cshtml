@@ -148,8 +148,13 @@
                                     @(item.Titular.Nombre + ' ' + item.Titular.Apellido)
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Crear Contrato", "CreateContrato","Contratos", new {
-                                    id_Inmueble = item.Id_Inmueble }, new { @class = "btn btn-outline-primary" }) |
+                                    @* @Html.ActionLink("Crear Contrato", "CreateContrato","Contratos", new {
+                                    id_Inmueble = item.Id_Inmueble }, new { @class = "btn btn-outline-primary" }) | *@
+
+     <a class="btn btn-primary" asp-controller="Contratos" asp-action="CreateContrato" asp-route-id="@item.Id_Inmueble"
+                                    title="Crear Contrato">
+                                    <i class="fa-solid fa-plus"></i>
+                                </a>
                             </td>
                         </tr>
                                                 }

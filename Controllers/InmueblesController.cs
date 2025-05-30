@@ -18,14 +18,16 @@ public class InmueblesController : Controller
     private readonly IRepositorioUso repoUso;
     private readonly IRepositorioPropietario repoPropietario;
     private readonly IConfiguration config;
+    private readonly IWebHostEnvironment environment;
 
-    public InmueblesController(IRepositorioInmueble repo, IRepositorioTipo repTipo, IRepositorioUso repUso, IRepositorioPropietario repoPro, IConfiguration config)
+    public InmueblesController(IRepositorioInmueble repo, IRepositorioTipo repTipo, IRepositorioUso repUso, IRepositorioPropietario repoPro, IConfiguration config, IWebHostEnvironment environment)
     {
         this.repoInmuble = repo;
         this.repoTipo = repTipo;
         this.repoUso = repUso;
         this.repoPropietario = repoPro;
         this.config = config;
+         this.environment = environment;
     }
 
     // GET: Inmuebles
@@ -37,6 +39,7 @@ public class InmueblesController : Controller
     }
 
     // GET: Inmuebles/Details/5
+    [HttpGet]
     public ActionResult Details(int id)
     {
         try
@@ -53,6 +56,7 @@ public class InmueblesController : Controller
     }
 
     // GET: Inmuebles/Create
+    [HttpGet]
     public ActionResult Create()
     {
         ViewBag.listaPropietarios = repoPropietario.ObtenerTodos();
@@ -62,9 +66,35 @@ public class InmueblesController : Controller
     }
 
     // POST: Inmuebles/Create
+    [HttpPost]
     [ValidateAntiForgeryToken]
     public ActionResult Create(Inmueble inmueble)
     {
+          if (inmueble.AvatarFile != null)
+            {
+                 //Inicio tratamiento del Avatar
+            var nom = Guid.NewGuid();
+
+                string wwwPath = environment.WebRootPath;
+                string path = Path.Combine(wwwPath, "Uploads");
+
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+
+                string filename = "avatarInm_" + nom + Path.GetExtension(inmueble.AvatarFile.FileName);
+                string pathCompleto = Path.Combine(path, filename);
+
+
+                using (FileStream stream = new FileStream(pathCompleto, FileMode.Create))
+                {
+                    inmueble.AvatarFile.CopyTo(stream);
+                }
+
+                inmueble.Avatar = Path.Combine("/Uploads", filename);
+
+            }
         repoInmuble.Alta(inmueble);
 
         TempData["creado"] = "Si";
@@ -73,6 +103,7 @@ public class InmueblesController : Controller
     }
 
     // GET: Inmuebles/Edit/5
+    [HttpGet]
     public ActionResult Edit(int id)
     {
         ViewBag.listaPropietarios = repoPropietario.ObtenerTodos();
@@ -86,10 +117,35 @@ public class InmueblesController : Controller
     }
 
     // POST: Inmuebles/Edit/5
-
+    [HttpPost]
     [ValidateAntiForgeryToken]
     public ActionResult Edit(int id, Inmueble inmueble)
     {
+         if (inmueble.AvatarFile != null)
+            {
+                 //Inicio tratamiento del Avatar
+                var nom = Guid.NewGuid();
+
+                string wwwPath = environment.WebRootPath;
+                string path = Path.Combine(wwwPath, "Uploads");
+
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+
+                string filename = "avatarInm_" + nom + Path.GetExtension(inmueble.AvatarFile.FileName);
+                string pathCompleto = Path.Combine(path, filename);
+
+
+                using (FileStream stream = new FileStream(pathCompleto, FileMode.Create))
+                {
+                    inmueble.AvatarFile.CopyTo(stream);
+                }
+
+                inmueble.Avatar = Path.Combine("/Uploads", filename);
+
+            }
         repoInmuble.Modificacion(inmueble);
         TempData["editado"] = "Si";
         return RedirectToAction(nameof(Index));

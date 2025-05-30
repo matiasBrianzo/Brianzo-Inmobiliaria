@@ -41,5 +41,10 @@ public class Inmueble
     public int Id_Propietario { get; set; }
     [ForeignKey(nameof(Id_Propietario))]
     public Propietario? Titular { get; set; }
+
+    [Display(Name = "Inmueble")]
+    public string? Avatar { get; set; }
+    
+    public IFormFile? AvatarFile { get; set; }
     
 }
