@@ -48,9 +48,22 @@ namespace Brianzo_Inmobiliaria.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Pago pago)
         {
-            repoPago.Alta(pago);
-            TempData["creado"] = "Si";
-            return RedirectToAction(nameof(Index));
+            if (!ModelState.IsValid)// Pregunta si el modelo es válido
+			{  
+                TempData["error"] = "Si";
+                 return RedirectToAction(nameof(Create));
+            }
+            try{
+                 repoPago.Alta(pago);
+                 TempData["creado"] = "Si";
+               return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                TempData["errorContrato"] = "Si";
+                return RedirectToAction(nameof(Create));
+            }
+          
         }
 
 
@@ -67,9 +80,22 @@ namespace Brianzo_Inmobiliaria.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, Pago pago)
         {
-            repoPago.Modificacion(pago);
+           
+              if (!ModelState.IsValid)// Pregunta si el modelo es válido
+			{  
+                TempData["error"] = "Si";
+                 return RedirectToAction(nameof(Edit));
+            }
+            try{
+                repoPago.Modificacion(pago);
             TempData["editado"] = "Si";
             return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                TempData["errorContrato"] = "Si";
+                return RedirectToAction(nameof(Edit));
+            }
         }
 
         // GET: Pagos/Delete/5
@@ -106,7 +132,12 @@ namespace Brianzo_Inmobiliaria.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult PagoPorContrato(int id, Pago pago)
-        {           
+        {     
+            if (pago.Importe <= 0)
+            {
+                TempData["errorImporte"] = "Si";
+                return RedirectToAction(nameof(PagoPorContrato), id);
+            }     
             repoPago.Alta(pago);
             return RedirectToAction(nameof(PagoPorContrato), id);
         }

@@ -6,7 +6,18 @@
 
 <h2>Editar Pago</h2>
 
+
 <hr />
+   @if(TempData["error"] !=  null){
+        <div class="alert alert-info" role="alert">
+        Por favor, complete el formulario para crear un nuevo Pago.
+        </div>
+    }
+      @if(TempData["errorContrato"] !=  null){
+        <div class="alert alert-danger" role="alert">
+        El Contrato seleccionado no tiene asociado un Pago.
+        </div>
+    }
 
 <div class="card">
   <div class="card-header">

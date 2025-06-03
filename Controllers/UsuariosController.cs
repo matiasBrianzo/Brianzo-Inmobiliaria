@@ -58,6 +58,12 @@ namespace Brianzo_Inmobiliaria.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Usuario usuario)
         {
+
+            if (!ModelState.IsValid)// Pregunta si el modelo es válido
+			{  
+                TempData["error"] = "Si";
+                 return RedirectToAction(nameof(Create));
+            }
             string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
                             password: usuario.Password,
                             salt: System.Text.Encoding.ASCII.GetBytes(configuration["Salt"]),

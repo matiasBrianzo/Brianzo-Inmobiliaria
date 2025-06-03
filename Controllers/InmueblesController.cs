@@ -70,6 +70,12 @@ public class InmueblesController : Controller
     [ValidateAntiForgeryToken]
     public ActionResult Create(Inmueble inmueble)
     {
+        if (!ModelState.IsValid)// Pregunta si el modelo es válido
+			{  
+                TempData["error"] = "Si";
+                 return RedirectToAction(nameof(Create));
+            }
+                
           if (inmueble.AvatarFile != null)
             {
                  //Inicio tratamiento del Avatar
@@ -100,6 +106,7 @@ public class InmueblesController : Controller
         TempData["creado"] = "Si";
 
         return RedirectToAction(nameof(Index));
+        
     }
 
     // GET: Inmuebles/Edit/5

@@ -14,6 +14,9 @@ public class Pago
 
 
     [Required]
+    [Range(1, 100)]
+    [DataType(DataType.Currency)]
+    [Column(TypeName = "decimal(18, 2)")]
     public Decimal Importe { get; set; }
 
 

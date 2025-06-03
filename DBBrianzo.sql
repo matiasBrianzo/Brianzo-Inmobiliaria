@@ -1,4 +1,11 @@
--- Versión de MySQL: 10.4.24-MariaDB
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 03-06-2025 a las 02:37:08
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -46,10 +53,12 @@ INSERT INTO `contratos` (`Id_Contrato`, `Fecha_Inicio`, `Fecha_Fin`, `Monto`, `I
 (18, '2024-04-15', '2024-04-23', 150000, 1, 1),
 (32, '2024-04-03', '2024-04-07', 12, 1, 1),
 (35, '2024-04-01', '2024-04-02', 123, 1, 1),
-(37, '2025-05-01', '2025-09-17', 188888, 1, 1),
+(37, '2025-05-01', '2025-05-24', 188888, 1, 1),
 (38, '2024-04-01', '2025-04-22', 21, 3, 1),
 (39, '2025-04-01', '2025-04-22', 5677, 1, 1),
-(40, '2025-05-01', '2025-05-10', 5677, 3, 1);
+(40, '2025-05-01', '2025-05-10', 5677, 3, 1),
+(41, '2025-05-01', '2025-05-24', 89999, 7, 7),
+(42, '2025-05-25', '2025-05-26', 111111111, 7, 7);
 
 -- --------------------------------------------------------
 
@@ -67,22 +76,28 @@ CREATE TABLE `inmuebles` (
   `Longitud` decimal(10,0) NOT NULL,
   `Precio` decimal(10,0) NOT NULL,
   `Activo` tinyint(1) NOT NULL,
-  `Id_Propietario` int(11) NOT NULL
+  `Id_Propietario` int(11) NOT NULL,
+  `Avatar` varchar(150) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `inmuebles`
 --
 
-INSERT INTO `inmuebles` (`Id_Inmueble`, `Direccion`, `Id_Uso`, `Id_Tipo`, `Ambientes`, `Latitud`, `Longitud`, `Precio`, `Activo`, `Id_Propietario`) VALUES
-(1, 'Caseros 123', 2, 4, 7, 11, 12, 150000, 1, 1),
-(2, 'Av Centenario 555', 2, 3, 6, 22, 21, 235000, 0, 2),
-(3, 'Chacabuco 456', 1, 2, 2, 33, 31, 478000, 1, 2),
-(5, 'Caseros 230', 1, 1, 0, 23, 23, 1500, 1, 1),
-(6, 'Ayacucho', 2, 4, 2, 156, 321, 175000, 1, 5),
-(7, 'Juan G Funes', 2, 4, 4, 478, 458, 100000, 1, 5),
-(8, 'Belgrano 999', 1, 1, 3, 156, 123, 350000, 1, 4),
-(10, 'Los paraisos m 173 c17', 2, 1, 2, 333, 11, 56000, 1, 4);
+INSERT INTO `inmuebles` (`Id_Inmueble`, `Direccion`, `Id_Uso`, `Id_Tipo`, `Ambientes`, `Latitud`, `Longitud`, `Precio`, `Activo`, `Id_Propietario`, `Avatar`) VALUES
+(1, 'Caseros 123', 2, 4, 7, 11, 12, 150000, 1, 1, ''),
+(2, 'Av Centenario 555', 2, 3, 6, 22, 21, 235000, 0, 2, ''),
+(3, 'Chacabuco 456', 1, 2, 2, 33, 31, 478000, 1, 2, ''),
+(5, 'Caseros 230', 1, 1, 0, 23, 23, 1500, 1, 1, '/Uploads\\avatarInm_4c6e71d7-d9ef-49fb-83d3-f2893f770085.jpg'),
+(6, 'Ayacucho', 2, 4, 2, 156, 321, 175000, 1, 5, ''),
+(7, 'Juan G Funes', 2, 4, 4, 478, 458, 100000, 1, 5, ''),
+(8, 'Belgrano 999', 1, 1, 3, 156, 123, 350000, 1, 4, ''),
+(10, 'Los paraisos m 173 c17', 2, 1, 2, 333, 11, 56000, 1, 4, ''),
+(12, 'Los paraisos m 173 c17', 2, 3, 2, 333, 333, 150000, 1, 1, NULL),
+(13, 'Los paraisos m 173 c17', 2, 3, 111, 2, 3, 333, 1, 2, NULL),
+(14, '11', 1, 1, 22, 323, 434, 43232, 1, 1, '/Uploads\\avatarInm_5ef255f7-e612-4045-8222-35423b672ccd.jpg'),
+(15, 'casa', 1, 1, 222, 444, 67876876, 56000, 1, 1, '/Uploads\\avatarInm_5258badd-39cc-4e7c-9ca7-e51bfa901bcc.jpg'),
+(16, 'total', 1, 1, 333, 333, 3233, 150000, 1, 12, NULL);
 
 -- --------------------------------------------------------
 
@@ -146,7 +161,16 @@ INSERT INTO `pagos` (`Id_Pago`, `Fecha`, `Importe`, `Id_Contrato`) VALUES
 (17, '2024-04-10', 40000, 6),
 (18, '0001-01-01', 0, 4),
 (19, '2024-04-02', 55, 1),
-(22, '2025-04-22', 999, 6);
+(22, '2025-04-22', 999, 6),
+(23, '2025-05-24', 34, 1),
+(29, '2025-06-03', 999, 1),
+(30, '2025-06-04', 10, 1),
+(33, '2025-06-02', 0, 5),
+(34, '0001-01-01', 0, 1),
+(35, '0001-01-01', 0, 1),
+(36, '0001-01-01', 0, 1),
+(37, '0001-01-01', 34, 3),
+(38, '2025-06-04', 10, 3);
 
 -- --------------------------------------------------------
 
@@ -169,11 +193,12 @@ CREATE TABLE `propietarios` (
 --
 
 INSERT INTO `propietarios` (`Id_Propietario`, `Apellido`, `Nombre`, `Dni`, `Telefono`, `Email`, `Clave`) VALUES
-(1, 'Matias', 'Brianzo', '3588888887', '2664658749', 'v@mail.com', '11'),
+(1, 'Matias', 'Brianzo', '3588888887', '2664658749', 'mb@mail.com', '11'),
 (2, 'Tomas', 'Perez', '10456789', '2664321654', 'ln@mail.com', '12'),
 (4, 'Carlo', 'Homero', '11222333', '2664332211', 'homer@g.com', '13'),
 (5, 'Jose', 'Miranda', '56222147', '2664485976', 'gok@g.com', '14'),
-(12, 'demo', 'www', '23234', '1111', 'matias.brianzo@gmail.com', '4444444444');
+(12, 'demo', 'www', '23234', '1111', 'matias.brianzo@gmail.com', '4444444444'),
+(13, 'Demo', 'test', '99999', '0266154708480', 'matias.brianzo@gmail.com', '3333333');
 
 -- --------------------------------------------------------
 
@@ -305,31 +330,31 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `contratos`
 --
 ALTER TABLE `contratos`
-  MODIFY `Id_Contrato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `Id_Contrato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT de la tabla `inmuebles`
 --
 ALTER TABLE `inmuebles`
-  MODIFY `Id_Inmueble` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `Id_Inmueble` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `inquilinos`
 --
 ALTER TABLE `inquilinos`
-  MODIFY `Id_Inquilino` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `Id_Inquilino` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `pagos`
 --
 ALTER TABLE `pagos`
-  MODIFY `Id_Pago` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `Id_Pago` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT de la tabla `propietarios`
 --
 ALTER TABLE `propietarios`
-  MODIFY `Id_Propietario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `Id_Propietario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `tipos`

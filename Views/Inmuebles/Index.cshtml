@@ -4,11 +4,12 @@
     ViewData["Title"] = "Listado de Inmuebles";
 }
 
-<h2>Listado de Inmuebles</h2>
-
-<p>
-    <a asp-action="Create"class="btn btn-primary">Crear nuevo inmueble</a>
-</p>
+<h1>
+	Listado de Inmuebles
+	<div class="btn-group pull-right">
+		<a class="btn btn-primary" asp-action="Create" title="Crear nuevo inquilino"><i class="fa-solid fa-plus"></i></a>
+	</div>
+</h1>
 
 
 
@@ -36,6 +37,7 @@
     @TempData["Otro"]
 </div>
 }
+
 
 <div class="card">
   <div class="card-header">
