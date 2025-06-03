@@ -5,23 +5,31 @@
 }
 
 <h1>Crear Inquilino</h1>
-
+ @if(TempData["error"] !=  null){
+        <div class="alert alert-info" role="alert">
+        Por favor, complete el formulario para crear un nuevo Inquilino.
+        </div>
+    }
 <hr />
 
 <div class="card">
   <div class="card-header">
-    Featured
+    Crear Inquilino
   </div>
   <div class="card-body">
     <div class="row">
     <div class="col-md-12">
         <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+         <div class="form-group">
                 <label asp-for="Apellido" class="control-label"></label>
                 <input asp-for="Apellido" class="form-control" />
                 <span asp-validation-for="Apellido" class="text-danger"></span>
-            </div>          
+            </div>
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="Dni" class="control-label"></label>
                 <input asp-for="Dni" class="form-control" />

@@ -61,6 +61,7 @@ public class InquilinosController : Controller
 	// GET: Inquilino/Create
 	public ActionResult Create()
 	{
+		TempData["error"] = "Si";
 		return View();
 	}
 	// POST: Inquilino/Create
@@ -68,15 +69,16 @@ public class InquilinosController : Controller
 	[ValidateAntiForgeryToken]
 	public ActionResult Create(Inquilino inquilino)
 	{
-		if (ModelState.IsValid)// Pregunta si el modelo es válido
+		if (!ModelState.IsValid)// Pregunta si el modelo es válido
 		{
-			repositorio.Alta(inquilino);
+			TempData["error"] = "Si";
+			return RedirectToAction(nameof(Create));
+		}
+		    repositorio.Alta(inquilino);
 			TempData["Id"] = inquilino.Id_Inquilino;
 			TempData["creado"] = "Si";
 			return RedirectToAction(nameof(Index));
-		}
-		else
-			return View(inquilino);
+	
 	}
 
 	// GET: Inquilino/Delete/5
